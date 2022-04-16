@@ -37,6 +37,7 @@ namespace Eventit.Controllers
         public IActionResult Post(User user)
         {
             _db.Add(user);
+            _db.SaveChanges();
             return Created("https://localhost:5001/user/created", JsonConvert.SerializeObject(user));
 
         }
