@@ -1,3 +1,4 @@
+DROP PROCEDURE addPlan, addUser
 -- Procedure to add a user, returns userID
 create procedure addUser(@email varchar(100), @password varchar(100), @name varchar(100), @userID int output)
 as
