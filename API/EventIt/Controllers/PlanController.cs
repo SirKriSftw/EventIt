@@ -89,15 +89,14 @@ namespace EventIt.Controllers
         }
         #endregion
 
-
         #region DELETE
         [HttpDelete]
         [Route("deletePlan")]
-        public IActionResult deletePlan(Plan removePlan, bool? confirmation, int? id)
+        public IActionResult deletePlan(bool? confirmation, int? planId)
         {
             try
             {
-                return Accepted(_plan.deletePlan(removePlan, confirmation, id));
+                return Accepted(_plan.deletePlan(confirmation, planId));
             }
             catch (System.Exception ex)
             {
