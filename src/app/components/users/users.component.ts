@@ -28,11 +28,11 @@ export class UsersComponent implements OnInit {
 
   onSignUp(value:any) {
    // console.log(this._http.post('https://localhost:44340/api/User', "{email: 'eventit@email', Password: 'test', name:'Gerome'}",{headers:new HttpHeaders({'Content-Type':'application/json'})}) );
-    console.log(value)
+    console.log(value);
 
   }
-  onLogin() {
-    
+  onLogin(value:any) {
+    console.log(value);
   }
  
 
