@@ -5,7 +5,6 @@ import {FormsModule} from '@angular/forms';
 import { AppComponent } from './app.component';
 import { UsersComponent } from './components/users/users.component';
 import { PlansComponent } from './components/plans/plans.component';
-import {RouterModule} from '@angular/router';
 import {MatCardModule} from '@angular/material/card';
 import {MatButtonModule} from '@angular/material/button';
 import {MatToolbarModule} from '@angular/material/toolbar';
@@ -26,7 +25,6 @@ import { AppRoutingModule } from './app-routing.module';
     BrowserModule, 
     FormsModule,
      HttpClientModule, 
-     RouterModule, 
      MatCardModule, 
      MatButtonModule, 
      FlexLayoutModule, 
