@@ -85,6 +85,22 @@ namespace EventIt.Controllers
                 return BadRequest(ex.Message);
             }
         }
+        [HttpGet]
+        [Route("loginUser")]
+        public IActionResult loginUser(User loginUser)
+        {
+            try
+            {
+                return Ok(_user.loginUser(loginUser));
+            }
+            catch (System.Exception ex)
+            {
+                _logger.LogError(ex, ex.Message);
+                return BadRequest(ex.Message);
+            }
+        }
+
+
         #endregion
 
         #region PUT

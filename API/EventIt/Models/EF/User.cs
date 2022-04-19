@@ -150,6 +150,28 @@ namespace EventIt.Models.EF
             }
         }
         // IMPLEMENTED ^
+        public User loginUser(User loginUser)
+        {
+            // LINQ Method Syntax version
+            var vUser = db.Users.Where(u => u.Email == loginUser.Email && u.Password == loginUser.Password).Single();
+
+            User foundUser = new User();
+            if (vUser != null)
+            {
+                foundUser.UserId = vUser.UserId;
+                foundUser.Email = vUser.Email;
+                foundUser.Password = "";
+                foundUser.Name = vUser.Name;
+
+                return foundUser;
+            }
+            else
+            { 
+                throw new Exception("USER LOGIN NOT FOUND IN THE SYSTEM!");
+            }
+        }
+        // IMPLEMENTED ^
+
         #endregion
 
         #region UPDATE
