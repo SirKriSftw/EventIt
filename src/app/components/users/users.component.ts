@@ -21,9 +21,10 @@ export class UsersComponent implements OnInit {
   
   
  }
-
+ getSignUp:boolean = false;
+ visible:boolean = false;
   getForm() {
-    this._http.get('#SignUp')
+    this.visible = !this.visible;
   }
 
   onSignUp(value:any) {
