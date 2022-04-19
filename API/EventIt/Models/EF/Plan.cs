@@ -58,7 +58,7 @@ namespace EventIt.Models.EF
                 db.SaveChanges();
 
                 int PlanSuccess = Convert.ToInt32(iDparam.Value);
-                if (PlanSuccess != -1)
+                if (PlanSuccess == 1)
                 {
                     return "New Plan Created for USER#" + newPlan.UserId + " with ID#" + iDparam.Value;
                 }
@@ -151,22 +151,40 @@ namespace EventIt.Models.EF
         #endregion
 
         #region DELETE
-        public string deletePlan(bool? confirmation, int? planId)
+        public string deletePlan(Plan removePlan, bool? confirmation, int? id)
         {
-            
+            removePlan.PlanId = id.Value;
+            // LINQ Query Syntax Version
+            // var vUser = from u in db.Users
+            //            where u.UserId == removeUser.UserId
+            //            select u;
+
             // LINQ Method Syntax Version
-            var vPlan = db.Plans.Where(p => p.PlanId == planId).Single();
+            var vPlan = db.Plans.Where(p => p.PlanId == removePlan.PlanId).Single();
 
             if (confirmation == true)
             {
-                if (vPlan != null)
+                if (vPlan == null)
                 {
-                    db.Plans.Remove(vPlan);
+                    throw new Exception("NO USER IN THE SYSTEM!");
+                }
+                else
+                {
+                    if ((vPlan.UserId == removePlan.UserId) &&
+                        (vPlan.PlanDateStart == removePlan.PlanDateStart) &&
+                        (vPlan.PlanDateEnd == removePlan.PlanDateEnd))
+                    {
+                        db.Plans.Remove(vPlan);
+                    }
+                    else
+                    {
+                        db.SaveChanges();
+                        throw new Exception("PLAN DATA MIS-MATCH!!!!");
+                    }
+
                     db.SaveChanges();
                     return "Plan removed from the system!";
                 }
-                else
-                    throw new Exception("NO PLANS MATCHING PLAN#" + planId + " FOUND IN THE SYSTEM");
             }
             else
             {

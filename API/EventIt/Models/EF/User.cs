@@ -195,22 +195,77 @@ namespace EventIt.Models.EF
         #endregion
 
         #region DELETE
-        public string deleteUser(bool? confirmation, int? userId)
+        public string deleteUser(User removeUser, int? id)
         {
+            removeUser.UserId = id.Value;
+            
+            // LINQ Query Syntax Version
+            // var vUser = from u in db.Users
+            //            where u.UserId == removeUser.UserId
+            //            select u;
+
             // LINQ Method Syntax Version
-            var vUser = db.Users.Where(u => u.UserId == userId).Single();
+            var vUser = db.Users.Where(u => u.UserId == removeUser.UserId).ToList();
+
+            if (vUser.Count() == 0)
+            {
+                throw new Exception("NO USER IN THE SYSTEM!");
+            }
+            else
+            {
+                foreach (var us in vUser)
+                {
+                    if ((us.Email == removeUser.Email) &&
+                        (us.Password == removeUser.Password) &&
+                        (us.Name == removeUser.Name))
+                    {
+                        db.Users.Remove(us);
+                    }
+                    else
+                    {
+                        db.SaveChanges();
+                        throw new Exception("USER DATA MIS-MATCH!!!");
+                    }
+                }
+                db.SaveChanges();
+                return "User removed from the system!";
+            }
+        }
+        // IMPLEMENTED ^
+        public string deleteUser(User removeUser, bool? confirmation, int? id)
+        {
+            removeUser.UserId = id.Value;
+            // LINQ Query Syntax Version
+            // var vUser = from u in db.Users
+            //            where u.UserId == removeUser.UserId
+            //            select u;
+
+            // LINQ Method Syntax Version
+            var vUser = db.Users.Where(u => u.UserId == removeUser.UserId).Single();
 
             if (confirmation == true)
             {
-                if (vUser != null)
+                if (vUser == null)
                 {
-                    db.Users.Remove(vUser);
-                    db.SaveChanges();
-                    return "User removed from the system!";
+                    throw new Exception("NO USER IN THE SYSTEM!");
                 }
                 else
                 {
-                    throw new Exception("NO USER MATCHING USERID#" + userId + " IN THE SYSTEM!");
+                   
+                    if ((vUser.Email == removeUser.Email) &&
+                        (vUser.Password == removeUser.Password) &&
+                        (vUser.Name == removeUser.Name))
+                    {
+                        db.Users.Remove(vUser);
+                    }
+                    else
+                    {
+                        db.SaveChanges();
+                        throw new Exception("USER DATA MIS-MATCH!!!!");
+                    }
+                   
+                    db.SaveChanges();
+                    return "User removed from the system!";
                 }
             }
             else
