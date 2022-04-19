@@ -87,7 +87,7 @@ namespace EventIt.Controllers
         }
         [HttpGet]
         [Route("loginUser")]
-        public IActionResult loginUser(User loginUser)
+        public IActionResult loginUser([FromQuery] User loginUser)
         {
             try
             {
