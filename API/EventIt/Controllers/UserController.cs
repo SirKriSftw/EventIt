@@ -139,26 +139,11 @@ namespace EventIt.Controllers
         #region DELETE
         [HttpDelete]
         [Route("deleteUser")]
-        public IActionResult deleteUser(User removeUser, int? id)
+        public IActionResult deleteUser(bool? confirmation, int? id)
         {
             try
             {
-                return Accepted(_user.deleteUser(removeUser, id));
-            }
-            catch (System.Exception ex)
-            {
-                _logger.LogError(ex, ex.Message);
-                return BadRequest(ex.Message);
-            }
-        }
-
-        [HttpDelete]
-        [Route("deleteUser2")]
-        public IActionResult deleteUser(User removeUser, bool? confirmation, int? id)
-        {
-            try
-            {
-                return Accepted(_user.deleteUser(removeUser, confirmation, id));
+                return Accepted(_user.deleteUser(confirmation, id));
             }
             catch (System.Exception ex)
             {
