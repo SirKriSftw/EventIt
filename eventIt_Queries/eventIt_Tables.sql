@@ -20,3 +20,7 @@ create table Plans(
 )
 
 SELECT * FROM Users
+
+SELECT * FROM Users
+SELECT * FROM Plans
+SELECT * FROM Logs WHERE Level = 'Error'
