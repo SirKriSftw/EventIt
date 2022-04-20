@@ -1,15 +1,10 @@
-using System;
-using System.Collections.Generic;
-using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+
+
 using Eventit.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Data.SqlClient;
 using Microsoft.Extensions.Logging;
-using Newtonsoft.Json;
+using System;
 
 namespace Eventit.Controllers
 {
@@ -17,31 +12,101 @@ namespace Eventit.Controllers
     [ApiController]
     public class PlanController : ControllerBase
     {
-        private readonly ILogger<UserController> _logger;
-        private readonly EventitContext _db;
+        #region Logger Setup
+        private readonly ILogger<PlanController> _logger;
 
-        public PlanController(ILogger<UserController> logger, EventitContext eventitContext)
+        public PlanController(ILogger<PlanController> logger)
         {
             _logger = logger;
-            _db = eventitContext;
+        }
+        #endregion
+
+        static Plan _plan = new Plan();
+
+        #region POST
+        [HttpPost]
+        [Route("createplan")]
+        public IActionResult createPlan(Plan newplan)
+        {
+            try
+            {
+                return Created("", _plan.createPlan(newplan));
+            }
+            catch (System.Exception ex)
+
+            {
+                _logger.LogError(ex, ex.Message);
+                return BadRequest(ex.Message);
+            }
+
+        }
+        #endregion
+
+        #region GET
+        [HttpGet]
+        [Route("getPlan/All")]
+        public IActionResult getPlanListAll()
+        {
+            try
+            {
+                return Ok(_plan.getPlanListAll());
+            }
+            catch (System.Exception ex)
+            {
+                _logger.LogError(ex, ex.Message);
+                return BadRequest(ex.Message);
+            }
         }
 
         [HttpGet]
-        public IActionResult GetUsers()
+        [Route("getPlan/{id:int}")]
+        public IActionResult getPlanList(int? id)
         {
-
-            return Ok(_db.Plans);
+            try
+            {
+                return Ok(_plan.getPlanList(id));
+            }
+            catch (System.Exception ex)
+            {
+                _logger.LogError(ex, ex.Message);
+                return BadRequest(ex.Message);
+            }
         }
+        #endregion
 
-        [HttpPost]
-        public IActionResult Post(Plan plan)
+        #region PUT
+        [HttpPut]
+        [Route("updatePlan")]
+        public IActionResult updatePlan(Plan updatePlan, int? id)
         {
-            _db.Add(plan);
-            _db.SaveChanges();
-            return Created("https://localhost:5001/user/created", JsonConvert.SerializeObject(plan));
-
+            try
+            {
+                return Accepted(_plan.updatePlan(updatePlan, id));
+            }
+            catch (System.Exception ex)
+            {
+                _logger.LogError(ex, ex.Message);
+                return BadRequest(ex.Message);
+            }
         }
+        #endregion
 
+        #region DELETE
+        [HttpDelete]
+        [Route("deletePlan")]
+        public IActionResult deletePlan(bool? confirmation, int? planId)
+        {
+            try
+            {
+                return Accepted(_plan.deletePlan(confirmation, planId));
+            }
+            catch (System.Exception ex)
+            {
+                _logger.LogError(ex, ex.Message);
+                return BadRequest(ex.Message);
+            }
+        }
+        #endregion
 
     }
 }

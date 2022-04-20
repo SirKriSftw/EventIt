@@ -1,15 +1,8 @@
-using System;
-using System.Collections.Generic;
-using System.Data;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Eventit.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Data.SqlClient;
 using Microsoft.Extensions.Logging;
-using Newtonsoft.Json;
 
 namespace Eventit.Controllers
 {
@@ -17,31 +10,148 @@ namespace Eventit.Controllers
     [ApiController]
     public class UserController : ControllerBase
     {
-        private readonly ILogger<UserController> _logger;
-        private readonly EventitContext _db;
 
-        public UserController(ILogger<UserController> logger, EventitContext eventitContext)
+        #region Logger Setup
+        private readonly ILogger<UserController> _logger;
+
+        public UserController(ILogger<UserController> logger)
         {
             _logger = logger;
-            _db = eventitContext;
+        }
+        #endregion
+
+
+        // static User object for method calls
+        static User _user = new User();
+        EventitContext _db = new EventitContext();
+
+        #region POST
+        [HttpPost]
+        [Route("createUser")]
+        public IActionResult createUser(User newUser)
+        {
+            try
+            {
+                return Created("", _user.createUser(newUser));
+            }
+            catch (System.Exception ex)
+            {
+                _logger.LogError(ex, ex.Message);
+                return BadRequest(ex.Message);
+            }
+
+        }
+        #endregion
+
+        #region GET
+        [HttpGet]
+        [Route("getUser")]
+        public IActionResult getUserList()
+        {
+            try
+            {
+                return Ok(_user.getUserList());
+            }
+            catch (System.Exception ex)
+            {
+                _logger.LogError(ex, ex.Message);
+                return BadRequest(ex.Message);
+            }
         }
 
         [HttpGet]
-        public IActionResult GetUsers()
+        [Route("getUser/{id:int}")]
+        public IActionResult getUser(int? id)
+        {
+            try
+            {
+                return Ok(_user.getUser(id));
+            }
+            catch (System.Exception ex)
+            {
+                _logger.LogError(ex, ex.Message);
+                return BadRequest(ex.Message);
+            }
+        }
+        [HttpGet]
+        [Route("getUserID/{email}")]
+        public IActionResult getUserID(string email, string password)
         {
 
-            return Ok(_db.Users);
-        }
+                var userquery =
+                from usr in _db.Users
+                where usr.Email == email
+                select usr;
 
-        [HttpPost]
-        public IActionResult Post(User user)
+
+            if(userquery.First().Password != password)         
+            {
+                return
+                    BadRequest("Incorrect password");
+            }
+            else
+            {
+                try
+                {
+                    return Ok(_user.getUserID(email));
+                }
+                catch (System.Exception ex)
+                {
+                    _logger.LogError(ex, ex.Message);
+                    return BadRequest(ex.Message);
+                }
+            }
+        }
+        #endregion
+
+        #region PUT
+        [HttpPut]
+        [Route("updateUser")]
+        public IActionResult updateUser(User updateUser, int? id)
         {
-            _db.Add(user);
-            _db.SaveChanges();
-            return Created("https://localhost:5001/user/created", JsonConvert.SerializeObject(user));
-
+            try
+            {
+                return Accepted(_user.updateUser(updateUser, id));
+            }
+            catch (System.Exception ex)
+            {
+                _logger.LogError(ex, ex.Message);
+                return BadRequest(ex.Message);
+            }
         }
 
+        [HttpPut]
+        [Route("updateUserPassword/{userEmail}")]
+        public IActionResult updateUserPassword(string userEmail, string updatedPwd)
+        {
+            try
+            {
+                return Accepted(_user.updateUserPassword(userEmail, updatedPwd));
+            }
+            catch (System.Exception ex)
+            {
+                _logger.LogError(ex, ex.Message);
+                return BadRequest(ex.Message);
+            }
+        }
+        #endregion
+
+        #region DELETE
+        [HttpDelete]
+        [Route("deleteUser")]
+        public IActionResult deleteUser(bool? confirmation, int? userId)
+        {
+            try
+            {
+                return Accepted(_user.deleteUser(confirmation, userId));
+            }
+            catch (System.Exception ex)
+            {
+                _logger.LogError(ex, ex.Message);
+                return BadRequest(ex.Message);
+            }
+        }
+        #endregion
 
     }
 }
