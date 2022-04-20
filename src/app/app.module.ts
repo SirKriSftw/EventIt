@@ -13,6 +13,10 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { AppRoutingModule } from './app-routing.module';
 
 
+import { SignupDialogComponent } from './components/signup-dialog/signup-dialog.component';
+import { SignUpDialogContent } from './components/signup-dialog/signup-dialog.component';
+import { MatDialogModule } from '@angular/material/dialog';
+
 
 
 
@@ -22,7 +26,8 @@ import { AppRoutingModule } from './app-routing.module';
     AppComponent,
     UsersComponent,
     PlansComponent,
-    
+    SignupDialogComponent,
+    SignUpDialogContent
     
   ],
   imports: [
@@ -33,6 +38,7 @@ import { AppRoutingModule } from './app-routing.module';
      MatButtonModule, 
      FlexLayoutModule, 
      MatToolbarModule,
+     MatDialogModule,
      BrowserAnimationsModule,
      AppRoutingModule,
      
