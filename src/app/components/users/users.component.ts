@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import {HttpClient, HttpHeaders} from '@angular/common/http';
+import {HttpClient} from '@angular/common/http';
+import { HttpHeaders } from '@angular/common/http';
+import { Router } from '@angular/router';
 
 
 
@@ -12,15 +14,17 @@ import {HttpClient, HttpHeaders} from '@angular/common/http';
 export class UsersComponent implements OnInit {
 
  _http:HttpClient;
-
+router:any;
  
 
  signUpForm:any = [ ];
- constructor(_httpRef:HttpClient) {
-  this._http = _httpRef;
+ constructor(_httpRef:HttpClient, private route:Router) {
+  this._http = _httpRef,
+  this.router = route;
   
   
  }
+
  getSignUp:boolean = false;
  visible:boolean = false;
   getForm() {
@@ -28,7 +32,17 @@ export class UsersComponent implements OnInit {
   }
 
   onSignUp(value:any) {
-   // console.log(this._http.post('https://localhost:44340/api/User', "{email: 'eventit@email', Password: 'test', name:'Gerome'}",{headers:new HttpHeaders({'Content-Type':'application/json'})}) );
+    fetch('https://localhost:5001/api/User/createUser', 
+    {
+      method: "POST",
+      body: JSON.stringify(value),
+      headers: {
+        "Content-type": "application/json; charset=UTF-8"
+      }
+    })
+    .then(response =>response.json())
+    .then(json => console.log(json));
+   (this._http.post('https://localhost:5001/api/User/createUser',JSON.stringify(value),{headers:new HttpHeaders({'Content-Type':'application/json'})}) );
     console.log(value);
 
   }
@@ -36,8 +50,10 @@ export class UsersComponent implements OnInit {
     console.log(value);
   }
  
-
   ngOnInit(): void {
   }
 
+navigateByUrl() {
+  this.router.navigateByUrl('plans');
+}
 }

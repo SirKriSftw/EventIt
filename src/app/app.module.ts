@@ -15,11 +15,15 @@ import { AppRoutingModule } from './app-routing.module';
 
 
 
+
+
 @NgModule({
   declarations: [
     AppComponent,
     UsersComponent,
     PlansComponent,
+    
+    
   ],
   imports: [
     BrowserModule, 
@@ -31,6 +35,8 @@ import { AppRoutingModule } from './app-routing.module';
      MatToolbarModule,
      BrowserAnimationsModule,
      AppRoutingModule,
+     
+  
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -1,7 +1,6 @@
 
 <div class="container">
     <h1>Welcome to Event It</h1>
-    <a routerLink="/plans"><a href ="plans.component.html">Plans</a></a>
     <div id="Login">
         <form #loginForm="ngForm" (ngSubmit) ="onLogin(loginForm.value)">
             <div class="form-group">
@@ -12,11 +11,11 @@
                 <label for="pWord">Password:</label>
                 <input type="text" id="pWord" name="password" placeholder="Password" class="form-control" [ngModel]/>
             </div>
-            <button type="submit" class="btn btn-primary" id ="loginButton">Login</button>
+            <button type="submit" (click)="navigateByUrl()" class="btn btn-primary" id ="loginButton">Login</button>
             <br><br>
         </form>
     </div>
-<button (click) = "getForm()" type="button" id ="signUpButton"  class="btn btn-primary">SignUp</button>
+    <button (click) = "getForm()" type="button" id ="signUpButton"  class="btn btn-primary">SignUp</button>
     <div id ="SignUp">
         <form *ngIf ="visible" id="signUpForm" #userForm="ngForm" (ngSubmit) = "onSignUp(userForm.value)">
             <div class="form-group">
@@ -34,5 +33,5 @@
              <button type="submit" class="btn btn-primary">Submit</button>
         </form> 
     </div>
-    
+
 </div>
