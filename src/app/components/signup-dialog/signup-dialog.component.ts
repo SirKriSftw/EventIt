@@ -27,4 +27,5 @@ export class SignUpDialogContent {
   {
     console.log(value)
   }
+  
 }

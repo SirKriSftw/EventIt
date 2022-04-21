@@ -1,6 +1,6 @@
-
+<body>
 <div class="container">
-    <h1>Welcome to Event It</h1>
+    <h1>Event It<img src="C:\Users\tyler\desktop\EventItRepo\EventIt\src\app\components\users\EventItLogo.jpg" id="logo"/> </h1>
     <div id="Login">
         <form #loginForm="ngForm" (ngSubmit) ="onLogin(loginForm.value)">
             <div class="form-group">
@@ -11,9 +11,10 @@
                 <label for="pWord">Password:</label>
                 <input type="text" id="pWord" name="password" placeholder="Password" class="form-control" [ngModel]/>
             </div>
-            <button type="submit" (click)="navigateByUrl()" class="btn btn-primary" id ="loginButton">Login</button>
+            <button mat-raised-button color="primary" type="submit" (click)="navigateByUrl()" id ="loginButton">Login</button>
             <br><br>
         </form>
     </div>
     <app-signup-dialog></app-signup-dialog>
 </div>
+</body>

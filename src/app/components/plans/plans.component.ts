@@ -7,7 +7,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PlansComponent implements OnInit {
 
-  constructor() { }
+user:any;
+
+  constructor() { 
+    
+    this.user = {
+      name: 'Tyler',
+      description: "",
+    }
+  }
 
   ngOnInit(): void {
   }

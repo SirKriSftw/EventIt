@@ -16,6 +16,11 @@ import { AppRoutingModule } from './app-routing.module';
 import { SignupDialogComponent } from './components/signup-dialog/signup-dialog.component';
 import { SignUpDialogContent } from './components/signup-dialog/signup-dialog.component';
 import { MatDialogModule } from '@angular/material/dialog';
+import { AddbuttonComponent, AddbuttonContent } from './components/addbutton/addbutton.component';
+import {MatInputModule} from '@angular/material/input';
+
+
+
 
 
 
@@ -27,7 +32,10 @@ import { MatDialogModule } from '@angular/material/dialog';
     UsersComponent,
     PlansComponent,
     SignupDialogComponent,
-    SignUpDialogContent
+    SignUpDialogContent,
+    AddbuttonComponent,
+    AddbuttonContent,
+    
     
   ],
   imports: [
@@ -41,8 +49,9 @@ import { MatDialogModule } from '@angular/material/dialog';
      MatDialogModule,
      BrowserAnimationsModule,
      AppRoutingModule,
-     
-  
+     MatInputModule,
+    
+    
   ],
   providers: [],
   bootstrap: [AppComponent]
