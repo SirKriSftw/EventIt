@@ -1,3 +1,4 @@
+import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -7,9 +8,24 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PlansComponent implements OnInit {
 
-  constructor() { }
-
-  ngOnInit(): void {
+  _http:HttpClient;
+  plans:any;
+  loggedInUser:any;
+  constructor(_httpRef:HttpClient) 
+  { 
+    this.loggedInUser = localStorage.getItem('currentUser');
+    this._http = _httpRef;
+    
   }
 
+  ngOnInit(): void {
+    var userId = JSON.parse(this.loggedInUser).userId;
+    console.log(this._http.get('https://localhost:44371/api/Plan/getPlan/' + userId).subscribe(
+      (result) => {
+        this.plans = result;
+        console.log(this.plans);
+      }
+    ))
+    
+  }
 }

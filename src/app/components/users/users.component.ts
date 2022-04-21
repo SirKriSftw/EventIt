@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import { HttpHeaders } from '@angular/common/http';
 import { Router } from '@angular/router';
+import { AuthenticateService } from 'src/app/services/authenticate.service';
 
 
 
@@ -14,12 +15,15 @@ import { Router } from '@angular/router';
 export class UsersComponent implements OnInit {
 
  _http:HttpClient;
+ _auth:AuthenticateService;
 router:any;
+error = '';
  
 
  signUpForm:any = [ ];
- constructor(_httpRef:HttpClient, private route:Router) {
-  this._http = _httpRef,
+ constructor(_httpRef:HttpClient, _authRef:AuthenticateService, private route:Router) {
+  this._http = _httpRef;
+  this._auth = _authRef;
   this.router = route;
   
   
@@ -32,22 +36,20 @@ router:any;
   }
 
   onSignUp(value:any) {
-    fetch('https://localhost:5001/api/User/createUser', 
-    {
-      method: "POST",
-      body: JSON.stringify(value),
-      headers: {
-        "Content-type": "application/json; charset=UTF-8"
-      }
-    })
-    .then(response =>response.json())
-    .then(json => console.log(json));
-   (this._http.post('https://localhost:5001/api/User/createUser',JSON.stringify(value),{headers:new HttpHeaders({'Content-Type':'application/json'})}) );
+   this._http.post('https://localhost:44371/api/User/createUser',JSON.stringify(value),{headers:new HttpHeaders({'Content-Type':'application/json'})}).subscribe();
     console.log(value);
 
   }
   onLogin(value:any) {
-    console.log(value);
+    console.log(this._auth.authenticate(value.email,value.password).subscribe((result) =>
+    {
+      this.navigateByUrl();
+    },
+    (err) => {
+      this.error = err.error.message != undefined ? err.error.message : 'Error trying to login';
+    }
+    ));
+    console.log(this._auth.currentUser);
   }
  
   ngOnInit(): void {
