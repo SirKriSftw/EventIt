@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
+import { UsersService } from 'src/app/services/users.service';
 
 @Component({
   selector: 'app-signup-dialog',
@@ -23,9 +24,15 @@ export class SignupDialogComponent {
   templateUrl: './signup-dialog-content.html',
 })
 export class SignUpDialogContent {
-  onSignUp(value:any)
+
+  _user:UsersService
+  constructor(_userRef:UsersService)
   {
-    console.log(value)
+    this._user = _userRef;
+  }
+
+  onSignUp(value:any) {
+    this._user.signUp(value);
   }
   
 }

@@ -75,11 +75,11 @@ namespace EventIt.Controllers
         #region PUT
         [HttpPut]
         [Route("updatePlan")]
-        public IActionResult updatePlan(Plan updatePlan, int? id)
+        public IActionResult updatePlan(Plan updatePlan)
         {
             try
             {
-                return Accepted(_plan.updatePlan(updatePlan, id));
+                return Accepted(_plan.updatePlan(updatePlan));
             }
             catch (System.Exception ex)
             {
@@ -93,11 +93,11 @@ namespace EventIt.Controllers
         #region DELETE
         [HttpDelete]
         [Route("deletePlan")]
-        public IActionResult deletePlan(Plan removePlan, bool? confirmation, int? id)
+        public IActionResult deletePlan(bool? confirmation, int? id)
         {
             try
             {
-                return Accepted(_plan.deletePlan(removePlan, confirmation, id));
+                return Accepted(_plan.deletePlan(confirmation, id));
             }
             catch (System.Exception ex)
             {
