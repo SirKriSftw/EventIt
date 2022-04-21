@@ -1,0 +1,21 @@
+#Login {
+    margin-left: 20%;
+    margin-right: 20%;
+ }
+ #loginButton {
+ float:left;
+   margin-right: auto;
+   display: flexbox;
+   background-color: blue;
+   
+ }
+ .container {
+     position:relative;
+ }
+ h1 {
+    margin-top: 30%;
+    text-align: center;
+ }
+ body {
+     background-color: lightgrey;
+ }

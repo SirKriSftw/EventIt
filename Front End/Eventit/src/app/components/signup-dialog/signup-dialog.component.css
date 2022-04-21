@@ -1,0 +1,13 @@
+#SignUp {
+   
+}
+#signUpButton {
+    float:right;
+    margin-right: 42%;
+    margin-top:-3.5%;
+    display:flexbox;
+ 
+}
+.buttonClass {
+    margin-left: 3px;
+}
