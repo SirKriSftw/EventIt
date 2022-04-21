@@ -4,13 +4,13 @@
 </mat-toolbar>
 <body>
 <div class="content">
-    <mat-card class="InfoCards">
+    <mat-card class="InfoCards" *ngFor = "let p of plans">
         <mat-card-header>
-           <mat-card-title>Plans April 19th</mat-card-title> 
+           <mat-card-title>{{p.planDateStart | date:"MM/dd/yyyy"}} - {{p.planDateEnd | date:"MM/dd/yyyy"}}</mat-card-title> 
         </mat-card-header>
         <mat-card-content>
-            <p>Tyler 4:06PM-5:00Pm</p>
-            <p>This is a Test</p><br>
+            <p>{{p.planDateStart | date:"HH:mm"}} - {{p.planDateEnd | date:"HH:mm"}}</p>
+            <p>{{p.details}}</p>
         </mat-card-content>
         <mat-card-footer>
             <div class="buttonClass">
