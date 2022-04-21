@@ -100,32 +100,17 @@ namespace EventIt.Controllers
                 return BadRequest(ex.Message);
             }
         }
-        [HttpGet]
-        [Route("loginUser")]
-        public IActionResult loginUser([FromQuery] User loginUser)
-        {
-            try
-            {
-                return Ok(_user.loginUser(loginUser));
-            }
-            catch (System.Exception ex)
-            {
-                _logger.LogError(ex, ex.Message);
-                return BadRequest(ex.Message);
-            }
-        }
-
 
         #endregion
 
         #region PUT
         [HttpPut]
         [Route("updateUser")]
-        public IActionResult updateUser(User updateUser, int? id)
+        public IActionResult updateUser(User updateUser)
         {
             try
             {
-                return Accepted(_user.updateUser(updateUser, id));
+                return Accepted(_user.updateUser(updateUser));
             }
             catch (System.Exception ex)
             {

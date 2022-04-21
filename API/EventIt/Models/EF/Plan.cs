@@ -58,7 +58,7 @@ namespace EventIt.Models.EF
                 db.SaveChanges();
 
                 int PlanSuccess = Convert.ToInt32(iDparam.Value);
-                if (PlanSuccess == 1)
+                if (PlanSuccess != -1)
                 {
                     return "New Plan Created for USER#" + newPlan.UserId + " with ID#" + iDparam.Value;
                 }
@@ -111,14 +111,12 @@ namespace EventIt.Models.EF
         #endregion
 
         #region UPDATE
-        public string updatePlan(Plan updatePlan, int? id)
+        public string updatePlan(Plan updatePlan)
         {
             if (updatePlan != null)
             {
                 // LINQ Method Syntax Version
-                var vPlans = db.Plans.Where(p => p.PlanId == id).Single();
-
-                updatePlan.PlanId = id.Value;
+                var vPlans = db.Plans.Where(p => p.PlanId == updatePlan.PlanId).Single();
 
                 SqlParameter planId = new SqlParameter("@planId", updatePlan.PlanId);
                 SqlParameter startTime = new SqlParameter("@startTime", updatePlan.PlanDateStart);
@@ -151,16 +149,11 @@ namespace EventIt.Models.EF
         #endregion
 
         #region DELETE
-        public string deletePlan(Plan removePlan, bool? confirmation, int? id)
+        public string deletePlan(bool? confirmation, int? id)
         {
-            removePlan.PlanId = id.Value;
-            // LINQ Query Syntax Version
-            // var vUser = from u in db.Users
-            //            where u.UserId == removeUser.UserId
-            //            select u;
 
             // LINQ Method Syntax Version
-            var vPlan = db.Plans.Where(p => p.PlanId == removePlan.PlanId).Single();
+            var vPlan = db.Plans.Where(p => p.PlanId == id).Single();
 
             if (confirmation == true)
             {
@@ -169,19 +162,8 @@ namespace EventIt.Models.EF
                     throw new Exception("NO USER IN THE SYSTEM!");
                 }
                 else
-                {
-                    if ((vPlan.UserId == removePlan.UserId) &&
-                        (vPlan.PlanDateStart == removePlan.PlanDateStart) &&
-                        (vPlan.PlanDateEnd == removePlan.PlanDateEnd))
-                    {
-                        db.Plans.Remove(vPlan);
-                    }
-                    else
-                    {
-                        db.SaveChanges();
-                        throw new Exception("PLAN DATA MIS-MATCH!!!!");
-                    }
-
+                { 
+                    db.Plans.Remove(vPlan);
                     db.SaveChanges();
                     return "Plan removed from the system!";
                 }
