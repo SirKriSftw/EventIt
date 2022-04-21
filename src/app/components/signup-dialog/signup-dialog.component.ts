@@ -1,3 +1,4 @@
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Component } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 
@@ -23,8 +24,14 @@ export class SignupDialogComponent {
   templateUrl: './signup-dialog-content.html',
 })
 export class SignUpDialogContent {
-  onSignUp(value:any)
+  _http:HttpClient
+
+  constructor(_httpRef:HttpClient)
   {
-    console.log(value)
+    this._http = _httpRef;
+  }
+
+  onSignUp(value:any) {
+   this._http.post('https://localhost:44371/api/User/createUser',value,{headers:new HttpHeaders({'Content-Type':'application/json'})}).subscribe();
   }
 }
