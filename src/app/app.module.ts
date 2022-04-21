@@ -18,6 +18,8 @@ import { SignUpDialogContent } from './components/signup-dialog/signup-dialog.co
 import { MatDialogModule } from '@angular/material/dialog';
 import { AddbuttonComponent, AddbuttonContent } from './components/addbutton/addbutton.component';
 import {MatInputModule} from '@angular/material/input';
+import { EditbuttonComponent } from './components/editbutton/editbutton.component';
+import { DeletebuttonComponent } from './components/deletebutton/deletebutton.component';
 
 
 
@@ -35,6 +37,8 @@ import {MatInputModule} from '@angular/material/input';
     SignUpDialogContent,
     AddbuttonComponent,
     AddbuttonContent,
+    EditbuttonComponent,
+    DeletebuttonComponent,
     
     
   ],
