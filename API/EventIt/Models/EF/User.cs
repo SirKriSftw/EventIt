@@ -175,10 +175,8 @@ namespace EventIt.Models.EF
 
         #region UPDATE
         // This method will update user name and email based on user ID given
-        public string updateUser(User updateUser, int? id)
+        public string updateUser(User updateUser)
         { 
-            updateUser.UserId = id.Value;
-
             // LINQ Method Syntax version
             var vUser = db.Users.Where(u => u.UserId == updateUser.UserId).Single();
 
