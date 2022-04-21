@@ -30,7 +30,7 @@ export class AddbuttonContent {
   }
   
   public addItem(): void {
-    this.listData.push(this.addForm.value);
+    //this.listData.push(this.addForm.value);
 
   }
 }

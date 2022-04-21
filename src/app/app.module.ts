@@ -16,7 +16,6 @@ import { AppRoutingModule } from './app-routing.module';
 import { SignupDialogComponent } from './components/signup-dialog/signup-dialog.component';
 import { SignUpDialogContent } from './components/signup-dialog/signup-dialog.component';
 import { MatDialogModule } from '@angular/material/dialog';
-<<<<<<< HEAD
 import { AddbuttonComponent, AddbuttonContent } from './components/addbutton/addbutton.component';
 import {MatInputModule} from '@angular/material/input';
 import { EditbuttonComponent } from './components/editbutton/editbutton.component';
@@ -24,9 +23,7 @@ import { DeletebuttonComponent } from './components/deletebutton/deletebutton.co
 
 
 
-=======
 import { AuthenticateService } from './services/authenticate.service';
->>>>>>> origin/main
 
 
 

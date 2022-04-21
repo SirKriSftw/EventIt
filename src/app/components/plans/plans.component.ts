@@ -8,19 +8,6 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PlansComponent implements OnInit {
 
-<<<<<<< HEAD
-user:any;
-
-  constructor() { 
-    
-    this.user = {
-      name: 'Tyler',
-      description: "",
-    }
-  }
-
-  ngOnInit(): void {
-=======
   _http:HttpClient;
   plans:any;
   loggedInUser:any;
@@ -29,7 +16,6 @@ user:any;
     this.loggedInUser = localStorage.getItem('currentUser');
     this._http = _httpRef;
     
->>>>>>> origin/main
   }
 
   ngOnInit(): void {
