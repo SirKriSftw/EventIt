@@ -16,6 +16,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { SignupDialogComponent } from './components/signup-dialog/signup-dialog.component';
 import { SignUpDialogContent } from './components/signup-dialog/signup-dialog.component';
 import { MatDialogModule } from '@angular/material/dialog';
+import { AuthenticateService } from './services/authenticate.service';
 
 
 
@@ -44,7 +45,7 @@ import { MatDialogModule } from '@angular/material/dialog';
      
   
   ],
-  providers: [],
+  providers: [AuthenticateService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
