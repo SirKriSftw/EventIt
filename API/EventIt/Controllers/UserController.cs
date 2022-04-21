@@ -1,4 +1,4 @@
-﻿using EventIt.Models.EF;
+using EventIt.Models.EF;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
@@ -38,6 +38,21 @@ namespace EventIt.Controllers
                 return BadRequest(ex.Message);
             }
 
+        }
+
+        [HttpPost]
+        [Route("authenticate")]
+        public IActionResult authenticateUser(User authUser)
+        {
+            try
+            {
+              return Ok(_user.authenticate(authUser));
+            }
+            catch (System.Exception ex)
+            {
+              _logger.LogError(ex, ex.Message);
+              return BadRequest(ex.Message);
+            }
         }
         #endregion
 

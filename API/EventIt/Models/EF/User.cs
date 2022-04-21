@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text.Json.Serialization;
@@ -20,7 +20,6 @@ namespace EventIt.Models.EF
         {
             Plans = new HashSet<Plan>();
         }
-        [JsonIgnore]
         public int UserId { get; set; }
         public string Email { get; set; }
         public string Password { get; set; }
@@ -30,6 +29,27 @@ namespace EventIt.Models.EF
         public virtual ICollection<Plan> Plans { get; set; }
 
         EventItContext db = new EventItContext();
+
+        public User authenticate(User authUser)
+        {
+          User loggedUser = new User();
+          
+          var vUser = db.Users.Where(u => u.Email == authUser.Email && u.Password == authUser.Password).SingleOrDefault();
+
+          if (vUser != null)
+          {
+            loggedUser.UserId = vUser.UserId;
+            loggedUser.Email = vUser.Email;
+            loggedUser.Password = "";
+            loggedUser.Name = vUser.Name;
+
+            return loggedUser;
+          }
+          else
+          {
+            throw new Exception("Authentication failed");
+          }
+        }
 
         #region CREATE
         public string createUser(User newUser)
@@ -147,27 +167,6 @@ namespace EventIt.Models.EF
             else
             {
                 return foundUser.UserId;
-            }
-        }
-        // IMPLEMENTED ^
-        public User loginUser(User loginUser)
-        {
-            // LINQ Method Syntax version
-            var vUser = db.Users.Where(u => u.Email == loginUser.Email && u.Password == loginUser.Password).Single();
-
-            User foundUser = new User();
-            if (vUser != null)
-            {
-                foundUser.UserId = vUser.UserId;
-                foundUser.Email = vUser.Email;
-                foundUser.Password = "";
-                foundUser.Name = vUser.Name;
-
-                return foundUser;
-            }
-            else
-            { 
-                throw new Exception("USER LOGIN NOT FOUND IN THE SYSTEM!");
             }
         }
         // IMPLEMENTED ^
