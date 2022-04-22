@@ -180,14 +180,11 @@ namespace EventIt.Models.EF
         #endregion
 
         #region DELETE
-        public string deletePlan(bool? confirmation, int? id)
+        public string deletePlan(int? id)
         {
-
             // LINQ Method Syntax Version
             var vPlan = db.Plans.Where(p => p.PlanId == id).Single();
 
-            if (confirmation == true)
-            {
                 if (vPlan == null)
                 {
                     throw new Exception("NO USER IN THE SYSTEM!");
@@ -198,11 +195,6 @@ namespace EventIt.Models.EF
                     db.SaveChanges();
                     return "Plan removed from the system!";
                 }
-            }
-            else
-            {
-                throw new Exception("PLAN DELETION CONFIRMATION FAILED!");
-            }
         }
         // IMPLEMENTED ^
         #endregion

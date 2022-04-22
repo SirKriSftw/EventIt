@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
+import { Router } from '@angular/router';
 import { PlanService } from 'src/app/services/plan.service';
 
 @Component({
@@ -23,9 +24,11 @@ export class AddbuttonComponent {
 export class AddbuttonContent {
   _planService:PlanService;
   error = '';
+  router:Router;
 
-  constructor(_planServiceRef:PlanService){
+  constructor(_planServiceRef:PlanService, routerRef:Router){
     this._planService = _planServiceRef;
+    this.router = routerRef;
   }
   
   onAdd(value:any)
@@ -36,7 +39,17 @@ export class AddbuttonContent {
       this.error='';
     },
     (err) => {
-      this.error='Failed to add plan';
+      console.log(err)
+      if(err.status == 201)
+      {
+        this.error='';
+        this.router.navigateByUrl('plans');
+      }
+      else
+      {
+        this.error="Failed to add new plan";
+      }
+      
     })
     console.log(value)
   }

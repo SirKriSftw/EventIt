@@ -22,13 +22,15 @@ export class PlansComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.updatePlans();
+  }
+
+  updatePlans(){
     this._planService.getFuturePlans().subscribe((result:any) =>{
       this.futurePlans = result;
       console.log(this.futurePlans)
     })
-
   }
-
   togglePastPlans() {
     if(this.pastPlans == null){
       this.getPastPlans();
@@ -41,12 +43,10 @@ export class PlansComponent implements OnInit {
     {
       this.showPastPlans = true;
     }
-    console.log(this.showPastPlans)
   }
   getPastPlans() {
     this._planService.getPastPlans().subscribe((result:any) =>{
       this.pastPlans = result;
-      console.log(this.pastPlans);
     })
   }
 }
