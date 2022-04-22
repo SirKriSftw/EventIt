@@ -11,7 +11,7 @@
          <mat-panel-title><b>{{p.planDateStart | date:"MM/dd/yyyy"}} - {{p.planDateEnd | date:"MM/dd/yyyy"}}</b></mat-panel-title> 
          <mat-panel-description>{{p.title}}
          <div class="buttonClass">
-             <app-deletebutton [planId]="p.planId"></app-deletebutton>
+             <app-deletebutton [planId]="p.planId" [plans]="futurePlans"></app-deletebutton>
             <app-editbutton></app-editbutton>
         </div> 
         </mat-panel-description>

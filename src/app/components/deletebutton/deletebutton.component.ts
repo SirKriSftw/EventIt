@@ -10,6 +10,8 @@ export class DeletebuttonComponent implements OnInit {
 
   @Input()
   planId: number = -1;
+  @Input()
+  plans:any = [];
 
   _planService:PlanService
   constructor(_planServiceRef:PlanService) {
@@ -20,6 +22,11 @@ export class DeletebuttonComponent implements OnInit {
   }
 
   deletePlan(){
-    this._planService.delPlan(this.planId).subscribe();
+    this._planService.delPlan(this.planId).subscribe((result) => {
+      var index = this.plans.findIndex((item:any, i:any) =>{
+        return item.planId === this.planId;
+      });
+      this.plans = this.plans.splice(index, 1);
+    });
   }
 }

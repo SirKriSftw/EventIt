@@ -1,6 +1,5 @@
-import { Component } from '@angular/core';
-import { MatDialog } from '@angular/material/dialog';
-import { Router } from '@angular/router';
+import { Component, Input } from '@angular/core';
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { PlanService } from 'src/app/services/plan.service';
 
 @Component({
@@ -9,10 +8,12 @@ import { PlanService } from 'src/app/services/plan.service';
   styleUrls: ['./addbutton.component.css']
 })
 export class AddbuttonComponent {
+  @Input()
+  plans = [];
   constructor(public dialog: MatDialog) { }
 
   openAddDialog() {
-    const dialogRef = this.dialog.open(AddbuttonContent, {width:'50%'});
+    let dialogRef = this.dialog.open(AddbuttonContent, {width:'50%'});
 
     dialogRef.afterClosed().subscribe();
   }
@@ -24,26 +25,22 @@ export class AddbuttonComponent {
 export class AddbuttonContent {
   _planService:PlanService;
   error = '';
-  router:Router;
 
-  constructor(_planServiceRef:PlanService, routerRef:Router){
+
+  constructor(_planServiceRef:PlanService){
     this._planService = _planServiceRef;
-    this.router = routerRef;
   }
   
   onAdd(value:any)
   {
-    console.log(value)
     this._planService.createPlan(value).subscribe((response) => {
-      console.log(response)
       this.error='';
     },
     (err) => {
-      console.log(err)
       if(err.status == 201)
       {
         this.error='';
-        this.router.navigateByUrl('plans');
+        window.location.reload(); 
       }
       else
       {
@@ -51,7 +48,8 @@ export class AddbuttonContent {
       }
       
     })
-    console.log(value)
+
+      
   }
   
  

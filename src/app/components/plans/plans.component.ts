@@ -28,6 +28,7 @@ export class PlansComponent implements OnInit {
   updatePlans(){
     this._planService.getFuturePlans().subscribe((result:any) =>{
       this.futurePlans = result;
+      this.futurePlans.sort();
       console.log(this.futurePlans)
     })
   }
