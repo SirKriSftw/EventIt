@@ -1,25 +1,22 @@
-#SignUp {
-    text-align: center;
-    margin-right: 200px;
-    margin-left: 200px;
-}
-#signUpButton {
-    margin-left: 400px;
-    margin-bottom: 100px;
 
-}
 #Login {
-    text-align:center;
-    margin-right: 200px;
-    margin-left: 200px;
+   margin-left: 20%;
+   margin-right: 20%;
 }
 #loginButton {
-  margin-left: 100px;
+float:left;
+  margin-left: 40%;
+  display:block;
+
   
 }
-h1 {
-    text-align: center;
-}
 .container {
-    margin-top: 200px;
+    position:relative;
+}
+h1 {
+   margin-top: 30%;
+   text-align: center;
+}
+body {
+    background-color: lightgrey;
 }

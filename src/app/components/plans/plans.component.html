@@ -1,16 +1,24 @@
 
 <mat-toolbar color="primary">
-    <span>EventIt</span>
+<button mat-button color="accent">Log Out</button> <h1>EventIt</h1> <span id="appAdd"><app-addbutton></app-addbutton></span>
 </mat-toolbar>
+<body>
 <div class="content">
-    <mat-card class="InfoCards" *ngFor = "let p of plans">
-        <mat-card-header>
-           <mat-card-title>{{p.planDateStart | date:"MM/dd/yyyy"}} - {{p.planDateEnd | date:"MM/dd/yyyy"}}</mat-card-title> 
-        </mat-card-header>
-        <mat-card-content>
-            <p>{{p.planDateStart | date:"HH:mm"}} - {{p.planDateEnd | date:"HH:mm"}}</p>
-            <p>{{p.details}}</p>
-        </mat-card-content>
-    </mat-card>
-</div>
-
+        <mat-accordion class="InfoCards" *ngFor = "let p of plans">
+        <mat-expansion-panel>
+        <mat-expansion-panel-header>
+         <mat-panel-title><b>{{p.planDateStart | date:"MM/dd/yyyy"}} - {{p.planDateEnd | date:"MM/dd/yyyy"}}</b></mat-panel-title> 
+         <mat-panel-description>Test Title 
+         <div class="buttonClass">
+             <app-deletebutton></app-deletebutton>
+            <app-editbutton></app-editbutton>
+        </div> 
+        </mat-panel-description>
+        </mat-expansion-panel-header>
+        <p>{{p.planDateStart | date:"HH:mm"}} - {{p.planDateEnd | date:"HH:mm"}}</p>
+        <p>Lorem Ipsum.</p>
+        </mat-expansion-panel>
+        </mat-accordion>
+     
+    </div>
+</body>

@@ -11,11 +11,19 @@ import {MatToolbarModule} from '@angular/material/toolbar';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { AppRoutingModule } from './app-routing.module';
-
+import {MatIconModule} from '@angular/material/icon'
 
 import { SignupDialogComponent } from './components/signup-dialog/signup-dialog.component';
 import { SignUpDialogContent } from './components/signup-dialog/signup-dialog.component';
 import { MatDialogModule } from '@angular/material/dialog';
+import { AddbuttonComponent, AddbuttonContent } from './components/addbutton/addbutton.component';
+import {MatInputModule} from '@angular/material/input';
+import { EditbuttonComponent } from './components/editbutton/editbutton.component';
+import { DeletebuttonComponent } from './components/deletebutton/deletebutton.component';
+import {MatTooltipModule} from '@angular/material/tooltip';
+import {MatExpansionModule} from '@angular/material/expansion';
+
+
 import { AuthenticateService } from './services/authenticate.service';
 
 
@@ -28,7 +36,13 @@ import { AuthenticateService } from './services/authenticate.service';
     UsersComponent,
     PlansComponent,
     SignupDialogComponent,
-    SignUpDialogContent
+    SignUpDialogContent,
+    AddbuttonComponent,
+    AddbuttonContent,
+    EditbuttonComponent,
+    DeletebuttonComponent,
+    
+    
     
   ],
   imports: [
@@ -42,8 +56,11 @@ import { AuthenticateService } from './services/authenticate.service';
      MatDialogModule,
      BrowserAnimationsModule,
      AppRoutingModule,
-     
-  
+     MatInputModule,
+     MatIconModule,
+     MatTooltipModule,
+     MatExpansionModule,
+    
   ],
   providers: [AuthenticateService],
   bootstrap: [AppComponent]

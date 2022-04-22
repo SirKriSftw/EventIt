@@ -34,4 +34,5 @@ export class SignUpDialogContent {
   onSignUp(value:any) {
     this._user.signUp(value);
   }
+  
 }
