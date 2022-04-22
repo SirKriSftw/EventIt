@@ -1,0 +1,14 @@
+.InfoCards {
+    margin-left: 5%;
+    margin-right: 5%;
+}
+button {
+    margin-left: 10px;
+}
+body {
+    background-color: lightgrey;
+}
+.edit{
+          align-items: flex-end;
+        margin-left: 70%;
+    }
