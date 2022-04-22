@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import { HttpHeaders } from '@angular/common/http';
 import {map} from 'rxjs/operators';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
@@ -10,10 +11,11 @@ export class AuthenticateService {
 
   _http:HttpClient;
   public currentUser:any;
-
-  constructor(_httpRef:HttpClient) {
+ router:any;
+  constructor(_httpRef:HttpClient, private route:Router) {
     this._http = _httpRef;
     this.currentUser = localStorage.getItem('currentUser');
+    this.router = route;
    }
 
   authenticate(email:any, password:any)
@@ -30,4 +32,10 @@ export class AuthenticateService {
     }));
     
   }
-}
+  navigateLogOutByUrl():void {
+    localStorage.removeItem('currentUser');
+    
+  }
+ 
+  }
+

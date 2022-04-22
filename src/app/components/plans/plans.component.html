@@ -1,6 +1,6 @@
 
 <mat-toolbar color="primary">
-<button mat-button color="accent">Log Out</button> <h1>EventIt</h1> <span id="appAdd"><app-addbutton></app-addbutton></span>
+<button mat-button color="accent" (click)="logOut()">Log Out</button> <h1>EventIt</h1> <span id="appAdd"><app-addbutton></app-addbutton></span>
 </mat-toolbar>
 <body>
 <div class="content">
@@ -8,7 +8,8 @@
         <mat-expansion-panel>
         <mat-expansion-panel-header>
          <mat-panel-title><b>{{p.planDateStart | date:"MM/dd/yyyy"}} - {{p.planDateEnd | date:"MM/dd/yyyy"}}</b></mat-panel-title> 
-         <mat-panel-description>Test Title 
+         <mat-panel-description><span id="description"> Test Title  </span>
+            
          <div class="buttonClass">
              <app-deletebutton></app-deletebutton>
             <app-editbutton></app-editbutton>
