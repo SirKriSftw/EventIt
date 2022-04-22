@@ -1,3 +1,4 @@
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
 @Injectable({
@@ -5,5 +6,33 @@ import { Injectable } from '@angular/core';
 })
 export class PlanService {
 
-  constructor() { }
+  _http:HttpClient
+  loggedInUser:any;
+
+  constructor(_httpRef:HttpClient) {
+    this._http = _httpRef;
+    this.loggedInUser = localStorage.getItem('currentUser');
+  }
+
+  createPlan(newPlan:any)
+  {
+    var data = {
+      "title": newPlan.title,
+      "details": newPlan.details,
+      "planDateStart": newPlan.startTime,
+      "planDateEnd": newPlan.endTime,
+      "userId": JSON.parse(this.loggedInUser).userId
+    }
+    console.log(data)
+    return this._http.post('https://localhost:44371/api/Plan/createplan/', data, {headers:new HttpHeaders({'Content-Type':'application/json'})});
+  }
+  getFuturePlans():any{
+    var userId = JSON.parse(this.loggedInUser).userId;
+    return this._http.get('https://localhost:44371/api/Plan/getFuturePlans/' + userId);
+  }
+
+  getPastPlans():any{
+    var userId = JSON.parse(this.loggedInUser).userId;
+    return this._http.get('https://localhost:44371/api/Plan/getPastPlans/' + userId);
+  }
 }

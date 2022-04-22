@@ -25,6 +25,7 @@ import {MatExpansionModule} from '@angular/material/expansion';
 
 
 import { AuthenticateService } from './services/authenticate.service';
+import { PlanService } from './services/plan.service';
 
 
 
@@ -62,7 +63,8 @@ import { AuthenticateService } from './services/authenticate.service';
      MatExpansionModule,
     
   ],
-  providers: [AuthenticateService],
+  providers: [AuthenticateService,
+              PlanService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

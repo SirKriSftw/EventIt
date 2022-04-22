@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text.Json.Serialization;
@@ -13,12 +13,12 @@ namespace EventIt.Models.EF
 {
     public partial class Plan
     {
-        [JsonIgnore]
         public int PlanId { get; set; }
         public int? UserId { get; set; }
         public DateTime? PlanDateStart { get; set; }
         public DateTime? PlanDateEnd { get; set; }
         public string Details { get; set; }
+        public string Title { get; set; }
 
         [JsonIgnore]
         public virtual User User { get; set; }
@@ -46,6 +46,7 @@ namespace EventIt.Models.EF
                 SqlParameter startTime = new SqlParameter("@startTime", newPlan.PlanDateStart);
                 SqlParameter endTime = new SqlParameter("@endTime", newPlan.PlanDateEnd);
                 SqlParameter details = new SqlParameter("@details", newPlan.Details);
+                SqlParameter title = new SqlParameter("@title", newPlan.Title);
 
                 var iDparam = new SqlParameter()
                 {
@@ -54,7 +55,7 @@ namespace EventIt.Models.EF
                     Direction = System.Data.ParameterDirection.Output
                 };
 
-                db.Database.ExecuteSqlRaw("exec addPlan @userId, @startTime, @endTime, @details, @iD output", userId, startTime, endTime, details, iDparam);
+                db.Database.ExecuteSqlRaw("exec addPlan @userId, @startTime, @endTime, @details, @title, @iD output", userId, startTime, endTime, details, title, iDparam);
                 db.SaveChanges();
 
                 int PlanSuccess = Convert.ToInt32(iDparam.Value);
@@ -108,10 +109,39 @@ namespace EventIt.Models.EF
 
         }
         // IMPLEMENTED ^
-        #endregion
+        public List<Plan> getPastPlanList(int? id)
+        {
+          var vPlans = db.Plans.Where(plans => plans.UserId == id && plans.PlanDateStart < DateTime.Now).ToList();
 
-        #region UPDATE
-        public string updatePlan(Plan updatePlan)
+          if (vPlans.Count() == 0)
+          {
+            throw new Exception("USER HAS NO PLANS IN THE SYSTEM!");
+          }
+          else
+          {
+            return vPlans;
+          }
+
+        }
+
+        public List<Plan> getFuturePlanList(int? id)
+        {
+          var vPlans = db.Plans.Where(plans => plans.UserId == id && plans.PlanDateStart >= DateTime.Now).ToList();
+
+          if (vPlans.Count() == 0)
+          {
+            throw new Exception("USER HAS NO PLANS IN THE SYSTEM!");
+          }
+          else
+          {
+            return vPlans;
+          }
+
+        }
+    #endregion
+
+    #region UPDATE
+    public string updatePlan(Plan updatePlan)
         {
             if (updatePlan != null)
             {
@@ -122,6 +152,7 @@ namespace EventIt.Models.EF
                 SqlParameter startTime = new SqlParameter("@startTime", updatePlan.PlanDateStart);
                 SqlParameter endTime = new SqlParameter("@endTime", updatePlan.PlanDateEnd);
                 SqlParameter details = new SqlParameter("@details", updatePlan.Details);
+                SqlParameter title = new SqlParameter("@title", updatePlan.Title);
 
                 var updateResult = new SqlParameter()
                 {
@@ -130,8 +161,8 @@ namespace EventIt.Models.EF
                     Direction = System.Data.ParameterDirection.Output
                 };
 
-                db.Database.ExecuteSqlRaw("exec updatePlan @planId, @startTime, @endTime, @details, @result output",
-                                           planId, startTime, endTime, details, updateResult);
+                db.Database.ExecuteSqlRaw("exec updatePlan @planId, @startTime, @endTime, @details, @title, @result output",
+                                           planId, startTime, endTime, details, title, updateResult);
                 db.SaveChanges();
 
                 bool PlanUpdateSuccess = Convert.ToBoolean(updateResult.Value);

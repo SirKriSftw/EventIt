@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import {HttpClient} from '@angular/common/http';
-import { HttpHeaders } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { AuthenticateService } from 'src/app/services/authenticate.service';
+
 
 
 
@@ -35,28 +35,13 @@ error = '';
     this.visible = !this.visible;
   }
 
-  onSignUp(value:any) {
-    var body = {
-      "userID":0,
-      "email": value.email,
-      "password": value.password,
-      "name":value.name
-    }
-   this._http.post('https://localhost:44371/api/User/createUser',body,{headers:new HttpHeaders({'Content-Type':'application/json'})}).subscribe(
-     (result) => {
-       console.log(result)
-     }
-   );
-    console.log(value);
-
-  }
   onLogin(value:any) {
     console.log(this._auth.authenticate(value.email,value.password).subscribe((result) =>
     {
       this.navigateByUrl();
     },
     (err) => {
-      this.error = err.error.message != undefined ? err.error.message : 'Error trying to login';
+      this.error = err.error.message != undefined ? err.error.message : 'Incorrect email or password';
     }
     ));
     console.log(this._auth.currentUser);

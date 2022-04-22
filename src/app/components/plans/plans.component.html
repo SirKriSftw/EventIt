@@ -1,15 +1,15 @@
 
-<mat-toolbar color="primary">
+<mat-toolbar color="primary" style="display:fixed;">
 <button mat-button color="accent" (click)="logOut()">Log Out</button> <h1>EventIt</h1> <span id="appAdd"><app-addbutton></app-addbutton></span>
 </mat-toolbar>
 <body>
+    <button mat-icon-button color="prinary" (click)="togglePastPlans()" matTooltip="Show Past Plans" matTooltipPosition="right"><mat-icon>keyboard_backspace</mat-icon></button>
 <div class="content">
-        <mat-accordion class="InfoCards" *ngFor = "let p of plans">
+        <mat-accordion class="InfoCards" *ngFor = "let p of futurePlans">
         <mat-expansion-panel>
         <mat-expansion-panel-header>
          <mat-panel-title><b>{{p.planDateStart | date:"MM/dd/yyyy"}} - {{p.planDateEnd | date:"MM/dd/yyyy"}}</b></mat-panel-title> 
-         <mat-panel-description><span id="description"> Test Title  </span>
-            
+         <mat-panel-description>{{p.title}}
          <div class="buttonClass">
              <app-deletebutton></app-deletebutton>
             <app-editbutton></app-editbutton>
@@ -17,8 +17,22 @@
         </mat-panel-description>
         </mat-expansion-panel-header>
         <p>{{p.planDateStart | date:"HH:mm"}} - {{p.planDateEnd | date:"HH:mm"}}</p>
-        <p>Lorem Ipsum.</p>
+        <p>{{p.details}}</p>
         </mat-expansion-panel>
+        </mat-accordion>
+
+        <mat-accordion class="InfoCards" *ngFor = "let p of pastPlans">
+            <mat-expansion-panel class="PastPlans" *ngIf="showPastPlans">
+            <mat-expansion-panel-header>
+             <mat-panel-title><b>{{p.planDateStart | date:"MM/dd/yyyy"}} - {{p.planDateEnd | date:"MM/dd/yyyy"}}</b></mat-panel-title> 
+             <mat-panel-description>{{p.title}}
+             <div class="buttonClass">
+            </div> 
+            </mat-panel-description>
+            </mat-expansion-panel-header>
+            <p>{{p.planDateStart | date:"HH:mm"}} - {{p.planDateEnd | date:"HH:mm"}}</p>
+            <p>{{p.details}}</p>
+            </mat-expansion-panel>
         </mat-accordion>
      
     </div>

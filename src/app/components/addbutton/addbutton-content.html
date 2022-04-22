@@ -7,15 +7,12 @@
            <input matInput type="datetime-local" ngModel name="startTime"/>
            <input matInput type="datetime-local" ngModel name="endTime"/>
           </div>
-          <div class="form-group">
-          <label for="name">Name:</label> 
-          <input type="text" id="name" name="name" placeholder="Name" class="form-control" ngModel/><br/>
-           </div>
            <div class="form-group">
               <label for="password">Description:</label> 
-              <input type="text" id="password"  name="password" placeholder="Description" class="form-control" ngModel/><br/>
+              <input type="text" id="password"  name="details" placeholder="Description" class="form-control" ngModel/><br/>
            </div>
            <button mat-raised-button color="primary" type="submit" mat-dialog-close>Add</button>
       </form> 
   </div>
+  <p>{{error}}</p>
   </mat-dialog-content>
