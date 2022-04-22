@@ -62,4 +62,4 @@ export class PlansComponent implements OnInit {
     })
 
   }
-
+}
