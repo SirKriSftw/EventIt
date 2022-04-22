@@ -215,7 +215,7 @@ namespace EventIt.Models.EF
 
         #region DELETE
 
-        public string deleteUser(bool? confirmation, int? id)
+        public string deleteUser(int? id)
         {
             // LINQ Query Syntax Version
             // var vUser = from u in db.Users
@@ -225,8 +225,6 @@ namespace EventIt.Models.EF
             // LINQ Method Syntax Version
             var vUser = db.Users.Where(u => u.UserId == id).Single();
 
-            if (confirmation == true)
-            {
                 if (vUser != null)
                 {
                     db.Users.Remove(vUser);
@@ -237,11 +235,6 @@ namespace EventIt.Models.EF
                 {
                     throw new Exception("NO USER IN THE SYSTEM!");
                 }
-            }
-            else
-            {
-                throw new Exception("USER DELETION CONFIRMATION FAILED!");
-            }
         }
         // IMPLEMENTED ^
         #endregion
