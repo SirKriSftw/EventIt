@@ -1,6 +1,7 @@
 
-<mat-toolbar color="primary" style="display:fixed;">
-<button mat-button color="accent">Log Out</button> <h1>EventIt</h1> <span id="appAdd"><app-addbutton></app-addbutton></span>
+
+<mat-toolbar color="primary">
+<button mat-button color="accent" (click)="logOut()">Log Out</button> <h1>EventIt</h1> <span id="appAdd"><app-addbutton></app-addbutton></span>
 </mat-toolbar>
 <body>
     <button mat-icon-button color="prinary" (click)="togglePastPlans()" matTooltip="Show Past Plans" matTooltipPosition="right"><mat-icon>keyboard_backspace</mat-icon></button>

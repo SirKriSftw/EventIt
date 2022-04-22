@@ -1,5 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { AuthenticateService } from 'src/app/services/authenticate.service';
 import { PlanService } from 'src/app/services/plan.service';
 
 @Component({
@@ -10,18 +12,27 @@ import { PlanService } from 'src/app/services/plan.service';
 export class PlansComponent implements OnInit {
 
   _http:HttpClient;
+  router:any;
+  _auth:AuthenticateService;
   _planService:PlanService;
   futurePlans:any;
   pastPlans:any;
   showPastPlans = false;
   loggedInUser:any;
-  constructor(_httpRef:HttpClient, _planServiceRef:PlanService) 
+  constructor(_httpRef:HttpClient,_authRef:AuthenticateService, private route:Router , _planServiceRef:PlanService) 
+
   { 
     this._http = _httpRef;
+    this.router = route;
+    this._auth = _authRef;
     this._planService = _planServiceRef;
   }
-
+ logOut():void {
+   this._auth.navigateLogOutByUrl();
+   this.router.navigateByUrl('login');
+ }
   ngOnInit(): void {
+
     this.updatePlans();
   }
 
@@ -49,5 +60,6 @@ export class PlansComponent implements OnInit {
     this._planService.getPastPlans().subscribe((result:any) =>{
       this.pastPlans = result;
     })
+
   }
-}
+
