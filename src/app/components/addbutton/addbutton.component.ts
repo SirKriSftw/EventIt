@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
+import { PlanService } from 'src/app/services/plan.service';
 
 @Component({
   selector: 'app-addbutton',
@@ -7,8 +8,6 @@ import { MatDialog } from '@angular/material/dialog';
   styleUrls: ['./addbutton.component.css']
 })
 export class AddbuttonComponent {
-
-  test:any;
   constructor(public dialog: MatDialog) { }
 
   openAddDialog() {
@@ -22,11 +21,24 @@ export class AddbuttonComponent {
   templateUrl: './addbutton-content.html',
 })
 export class AddbuttonContent {
-  listData:any = [];
+  _planService:PlanService;
+  error = '';
+
+  constructor(_planServiceRef:PlanService){
+    this._planService = _planServiceRef;
+  }
+  
   onAdd(value:any)
   {
     console.log(value)
-    this.listData= [value];
+    this._planService.createPlan(value).subscribe((response) => {
+      console.log(response)
+      this.error='';
+    },
+    (err) => {
+      this.error='Failed to add plan';
+    })
+    console.log(value)
   }
   
  

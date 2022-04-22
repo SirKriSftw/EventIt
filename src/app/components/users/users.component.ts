@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import {HttpClient} from '@angular/common/http';
-import { HttpHeaders } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { AuthenticateService } from 'src/app/services/authenticate.service';
+
 
 
 
@@ -41,7 +41,7 @@ error = '';
       this.navigateByUrl();
     },
     (err) => {
-      this.error = err.error.message != undefined ? err.error.message : 'Error trying to login';
+      this.error = err.error.message != undefined ? err.error.message : 'Incorrect email or password';
     }
     ));
     console.log(this._auth.currentUser);

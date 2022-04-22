@@ -1,10 +1,14 @@
-#SignUp {
+.SignUp {
    
-}
-#signUpButton {
-    float:right;
-    margin-right: 42%;
-    margin-top:-3.5%;
-    display:block;
+    display: inline-flexbox;
+    margin-left: 33%;
+ }
  
-}
+ .container{
+ 
+     margin-top: 12%;    
+  
+ }
+ .buttonClass {
+     margin-left: 3px;
+ }
