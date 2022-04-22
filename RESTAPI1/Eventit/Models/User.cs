@@ -21,7 +21,7 @@ namespace Eventit.Models
         {
             Plans = new HashSet<Plan>();
         }
-        [JsonIgnore]
+        
         public int UserId { get; set; }
         public string Name { get; set; }
         public string Email { get; set; }
@@ -33,8 +33,29 @@ namespace Eventit.Models
 
         EventitContext db = new EventitContext();
 
-        #region CREATE
-        public string createUser(User newUser)
+    public User authenticate(User authUser)
+    {
+      User loggedUser = new User();
+
+      var vUser = db.Users.Where(u => u.Email == authUser.Email && u.Password == authUser.Password).SingleOrDefault();
+
+      if (vUser != null)
+      {
+        loggedUser.UserId = vUser.UserId;
+        loggedUser.Email = vUser.Email;
+        loggedUser.Password = "";
+        loggedUser.Name = vUser.Name;
+
+        return loggedUser;
+      }
+      else
+      {
+        throw new Exception("Authentication failed");
+      }
+    }
+
+    #region CREATE
+    public string createUser(User newUser)
         {
             if (newUser != null)
             {

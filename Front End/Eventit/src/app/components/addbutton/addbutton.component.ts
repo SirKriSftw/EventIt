@@ -22,9 +22,15 @@ export class AddbuttonComponent {
   templateUrl: './addbutton-content.html',
 })
 export class AddbuttonContent {
+  listData:any = [];
   onAdd(value:any)
   {
     console.log(value)
+    this.listData= [value];
   }
   
+  public addItem(): void {
+    //this.listData.push(this.addForm.value);
+
+  }
 }

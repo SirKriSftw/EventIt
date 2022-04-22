@@ -1,20 +1,19 @@
-<body>
-    <div class="container">
-        <h1>Event It<img src="" id="logo"/> </h1>
-        <div id="Login">
-            <form #loginForm="ngForm">
-                <div class="form-group">
-                    <label for="uName">Email:</label>
-                    <input type="text" id="email" name="email" placeholder="Email" class="form-control" [ngModel]/>
-                </div>
-                <div class="form-group">
-                    <label for="pWord">Password:</label>
-                    <input type="text" id="pWord" name="password" placeholder="Password" class="form-control" [ngModel]/>
-                </div>
-                <button mat-raised-button color="primary" type="submit" (click)="onLogin(loginForm.value)" id ="loginButton">Login</button>
-                <br><br>
-            </form>
-        </div>
-        <app-signup-dialog></app-signup-dialog>
+<div class="container">
+    <h1>Welcome to Event It</h1>
+    <div id="Login">
+        <form #loginForm="ngForm" (ngSubmit) ="onLogin(loginForm.value)">
+            <div class="form-group">
+                <label for="uName">Email:</label>
+                <input type="text" id="email" name="email" placeholder="Email" class="form-control" [ngModel]/>
+            </div>
+            <div class="form-group">
+                <label for="pWord">Password:</label>
+                <input type="text" id="pWord" name="password" placeholder="Password" class="form-control" [ngModel]/>
+            </div>
+          <app-signup-dialog></app-signup-dialog>
+            <br><br>
+        </form>
     </div>
-    </body>
+  
+</div>
+

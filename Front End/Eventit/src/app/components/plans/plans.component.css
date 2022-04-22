@@ -8,3 +8,7 @@ button {
 body {
     background-color: lightgrey;
 }
+.edit{
+          align-items: flex-end;
+        margin-left: 70%;
+    }

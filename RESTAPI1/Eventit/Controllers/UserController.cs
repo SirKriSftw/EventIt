@@ -59,49 +59,20 @@ namespace Eventit.Controllers
             }
         }
 
-        [HttpGet]
-        [Route("getUser/{id:int}")]
-        public IActionResult getUser(int? id)
-        {
-            try
-            {
-                return Ok(_user.getUser(id));
-            }
-            catch (System.Exception ex)
-            {
-                _logger.LogError(ex, ex.Message);
-                return BadRequest(ex.Message);
-            }
-        }
-        [HttpGet]
-        [Route("getUserID/{email}")]
-        public IActionResult getUserID(string email, string password)
-        {
-
-                var userquery =
-                from usr in _db.Users
-                where usr.Email == email
-                select usr;
-
-
-            if(userquery.First().Password != password)         
-            {
-                return
-                    BadRequest("Incorrect password");
-            }
-            else
-            {
-                try
-                {
-                    return Ok(_user.getUserID(email));
-                }
-                catch (System.Exception ex)
-                {
-                    _logger.LogError(ex, ex.Message);
-                    return BadRequest(ex.Message);
-                }
-            }
-        }
+    [HttpGet]
+    [Route("getUser/{id:int}")]
+    public IActionResult getUser(int? id)
+    {
+      try
+      {
+        return Ok(_user.getUser(id));
+      }
+      catch (System.Exception ex)
+      {
+        _logger.LogError(ex, ex.Message);
+        return BadRequest(ex.Message);
+      }
+    }
         #endregion
 
         #region PUT
@@ -134,10 +105,25 @@ namespace Eventit.Controllers
                 return BadRequest(ex.Message);
             }
         }
-        #endregion
+    #endregion
 
-        #region DELETE
-        [HttpDelete]
+    [HttpPost]
+    [Route("authenticate")]
+    public IActionResult authenticateUser(User authUser)
+    {
+      try
+      {
+        return Ok(_user.authenticate(authUser));
+      }
+      catch (System.Exception ex)
+      {
+        _logger.LogError(ex, ex.Message);
+        return BadRequest(ex.Message);
+      }
+    }
+
+      #region DELETE
+      [HttpDelete]
         [Route("deleteUser")]
         public IActionResult deleteUser(bool? confirmation, int? userId)
         {

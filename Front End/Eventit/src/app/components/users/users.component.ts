@@ -2,8 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import { HttpHeaders } from '@angular/common/http';
 import { Router } from '@angular/router';
-import { SignupDialogComponent } from '../signup-dialog/signup-dialog.component';
-
+import { AuthenticateService } from 'src/app/services/authenticate.service';
+import { ErrorComponent } from '../error/error.component';
+import { MatDialog } from '@angular/material/dialog';
 
 
 @Component({
@@ -13,63 +14,52 @@ import { SignupDialogComponent } from '../signup-dialog/signup-dialog.component'
 })
 export class UsersComponent implements OnInit {
 
+  e = new ErrorComponent(this.dialog);
  _http:HttpClient;
+ _auth:AuthenticateService;
 router:any;
+error = '';
  
 
  signUpForm:any = [ ];
- constructor(_httpRef:HttpClient, private route:Router) {
-  this._http = _httpRef,
+ constructor(_httpRef:HttpClient, _authRef:AuthenticateService, private route:Router, public dialog: MatDialog) {
+  this._http = _httpRef;
+  this._auth = _authRef;
   this.router = route;
   
   
  }
 
- getSignUp:boolean = false;
- visible:boolean = false;
-  getForm() {
-    this.visible = !this.visible;
-  }
 
   onSignUp(value:any) {
-    fetch('https://localhost:5001/api/User/createUser', 
-    {
-      method: "POST",
-      body: JSON.stringify(value),
-      headers: {
-        "Content-type": "application/json; charset=UTF-8"
-      }
-    })
-    .then(response =>response.json())
-    .then(json => console.log(json));
-   (this._http.post('https://localhost:5001/api/User/createUser',JSON.stringify(value),{headers:new HttpHeaders({'Content-Type':'application/json'})}) );
+    var body = {
+      "userID":0,
+      "email": value.email,
+      "password": value.password,
+      "name":value.name
+    }
+   this._http.post('https://localhost:5001/api/User/createUser',body,{headers:new HttpHeaders({'Content-Type':'application/json'})}).subscribe(
+     (result) => {
+       console.log(result)
+     }
+   );
     console.log(value);
 
   }
-  async onLogin(value: any) {
-    value.name = null;
-    console.log(value);
-      let response = await fetch('https://localhost:5001/api/User/getUserID/'+value.email+"?password="+value.password);
+  onLogin(value:any) {
+    this._auth.authenticate(value.email,value.password).subscribe((result) =>
+    {
+      this.navigateByUrl();
+    },
+    (err) => {
+      this.e.errorPopUp();
+      this.error = err.error.message != undefined ? err.error.message : 'Error trying to login';
+    }
+    );
+    console.log(this._auth.currentUser);
+  }
+
   
-  if (response.ok) { // if HTTP-status is 200-299
-    // get the response body (the method explained below)
-    let json = await response.json();
-    console.log(json);
-      let plans = await fetch('https://localhost:5001/api/Plan/getPlan/'+json);
-        if(plans.ok){
-          let arr = await plans.json();
-            console.log(JSON.stringify(arr)); 
-            this.navigateByUrl();
-        }
-        else if (plans.status == 400)
-        {
-          this.navigateByUrl();
-        }
-  } 
-  else {
-    alert("Incorrect Username or Password");
-  }
-  }
  
   ngOnInit(): void {
   }

@@ -1,5 +1,8 @@
 import { Component } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
+import { UsersService } from 'src/app/services/users.service';
+import { UsersComponent } from '../users/users.component';
+
 
 @Component({
   selector: 'app-signup-dialog',
@@ -8,8 +11,15 @@ import { MatDialog } from '@angular/material/dialog';
 })
 export class SignupDialogComponent {
 
-  test:any;
-  constructor(public dialog: MatDialog) { }
+  _user:UsersComponent;
+
+  login(value:any){
+    const loginRef = this._user.onLogin(value);
+  }
+
+  constructor(public dialog: MatDialog, _userRef:UsersComponent) {
+    this._user = _userRef;
+   }
 
   openDialog() {
     const dialogRef = this.dialog.open(SignUpDialogContent, {width:'50%'});
@@ -23,9 +33,17 @@ export class SignupDialogComponent {
   templateUrl: './signup-dialog-content.html',
 })
 export class SignUpDialogContent {
-  onSignUp(value:any)
+
+  _user:UsersService
+  constructor(_userRef:UsersService)
   {
-    console.log(value)
+    this._user = _userRef;
   }
+
+  
+  onSignUp(value:any) {
+    this._user.signUp(value);
+  }
+
   
 }

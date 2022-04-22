@@ -1,0 +1,20 @@
+<h2 mat-dialog-title>Sign up</h2>
+<mat-dialog-content class="mat-typography">
+  <div id ="makePlan">
+    <form id="signUpForm" #userForm="ngForm" (ngSubmit) = "onSignUp(userForm.value)">
+        <div class="form-group">
+            <label for="Name">Name:</label> 
+         <input type="text" id="fullName"  name="name" placeholder="First Name" class="form-control" ngModel/><br/>
+        </div>
+        <div class="form-group">
+        <label for="email">Email:</label> 
+        <input type="text" id="email" name="email" placeholder="Email" class="form-control" ngModel/><br/>
+         </div>
+         <div class="form-group">
+            <label for="password">Password:</label> 
+            <input type="text" id="password"  name="password" placeholder="Password" class="form-control" ngModel/><br/>
+         </div>
+         <button mat-raised-button type="submit" color="primary" mat-dialog-close cdkFocusInitial>Submit</button>
+    </form> 
+</div>
+</mat-dialog-content>

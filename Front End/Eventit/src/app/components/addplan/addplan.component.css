@@ -1,0 +1,17 @@
+#makePlan {
+   
+}
+#makeplanButton {
+    float:left;
+    margin-left: 42%;
+    margin-top:-3.5%;
+    display:flexbox;
+ 
+}
+.buttonClass {
+    margin-left: 3px;
+}
+
+.demo-inline-calendar-card {
+ backface-visibility: visible;
+  }
