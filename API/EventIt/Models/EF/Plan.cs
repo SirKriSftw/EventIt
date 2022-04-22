@@ -15,8 +15,8 @@ namespace EventIt.Models.EF
     {
         public int PlanId { get; set; }
         public int? UserId { get; set; }
-        public DateTime? PlanDateStart { get; set; }
-        public DateTime? PlanDateEnd { get; set; }
+        public DateTime PlanDateStart { get; set; }
+        public DateTime PlanDateEnd { get; set; }
         public string Details { get; set; }
         public string Title { get; set; }
 
@@ -111,7 +111,7 @@ namespace EventIt.Models.EF
         // IMPLEMENTED ^
         public List<Plan> getPastPlanList(int? id)
         {
-          var vPlans = db.Plans.Where(plans => plans.UserId == id && plans.PlanDateStart < DateTime.Now).ToList();
+          var vPlans = db.Plans.Where(plans => plans.UserId == id && plans.PlanDateStart.Date < DateTime.Now.Date).ToList();
 
           if (vPlans.Count() == 0)
           {
@@ -126,7 +126,7 @@ namespace EventIt.Models.EF
 
         public List<Plan> getFuturePlanList(int? id)
         {
-          var vPlans = db.Plans.Where(plans => plans.UserId == id && plans.PlanDateStart >= DateTime.Now).ToList();
+          var vPlans = db.Plans.Where(plans => plans.UserId == id && plans.PlanDateStart.Date >= DateTime.Now.Date).ToList();
 
           if (vPlans.Count() == 0)
           {

@@ -32,7 +32,6 @@ export class PlansComponent implements OnInit {
    this.router.navigateByUrl('login');
  }
   ngOnInit(): void {
-
     this.updatePlans();
   }
 
