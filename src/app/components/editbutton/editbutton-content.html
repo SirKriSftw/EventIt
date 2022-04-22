@@ -1,0 +1,19 @@
+<h2 mat-dialog-title>Edit Plan</h2>
+<mat-dialog-content class="mat-typography">
+    <div id ="EditButton">
+      <form id="editForm" #editForm="ngForm" (ngSubmit)="onEdit(editForm.value)" >
+          <div class="form-group">
+              <label for="Title">Title:</label> 
+           <input type="text" name="title" class="form-control" [(ngModel)]="planTitle"/><br/>
+           <input matInput type="datetime-local" [(ngModel)]="planStart"  name="startTime"/>
+           <input matInput type="datetime-local" [(ngModel)]="planEnd"  name="endTime"/>
+          </div>
+           <div class="form-group">
+              <label for="password">Description:</label> 
+              <input type="text" id="password"  name="details" placeholder="Description" class="form-control" [(ngModel)]="planDetails"/><br/>
+           </div>
+           <button mat-raised-button color="accent" type="submit" >Edit</button>
+      </form> 
+  </div>
+  <p>{{error}}</p>
+  </mat-dialog-content>

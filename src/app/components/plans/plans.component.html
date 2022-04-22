@@ -13,7 +13,7 @@
          <mat-panel-description>{{p.title}}
          <div class="buttonClass">
              <app-deletebutton [planId]="p.planId" [plans]="futurePlans"></app-deletebutton>
-            <app-editbutton></app-editbutton>
+            <app-editbutton [planId]="p.planId" [planTitle]="p.title" [planStart]="p.planDateStart" [planEnd]="p.planDateEnd" [planDetails]="p.details"></app-editbutton>
         </div> 
         </mat-panel-description>
         </mat-expansion-panel-header>

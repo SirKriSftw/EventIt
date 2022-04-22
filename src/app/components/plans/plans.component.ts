@@ -18,7 +18,6 @@ export class PlansComponent implements OnInit {
   futurePlans:any;
   pastPlans:any;
   showPastPlans = false;
-  loggedInUser:any;
   constructor(_httpRef:HttpClient,_authRef:AuthenticateService, private route:Router , _planServiceRef:PlanService) 
 
   { 
