@@ -43,7 +43,11 @@ namespace EventIt.Models.EF
                     .IsUnicode(false)
                     .HasColumnName("details");
 
-                entity.Property(e => e.PlanDateEnd)
+              entity.Property(e => e.Title)
+                  .IsUnicode(false)
+                  .HasColumnName("title");
+
+              entity.Property(e => e.PlanDateEnd)
                     .HasColumnType("datetime")
                     .HasColumnName("planDateEnd");
 

@@ -2,8 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthenticateService } from 'src/app/services/authenticate.service';
-
-
+import { PlanService } from 'src/app/services/plan.service';
 
 @Component({
   selector: 'app-plans',
@@ -13,32 +12,54 @@ import { AuthenticateService } from 'src/app/services/authenticate.service';
 export class PlansComponent implements OnInit {
 
   _http:HttpClient;
-  plans:any;
   router:any;
-  value:any;
   _auth:AuthenticateService;
-
+  _planService:PlanService;
+  futurePlans:any;
+  pastPlans:any;
+  showPastPlans = false;
   loggedInUser:any;
-  constructor(_httpRef:HttpClient,_authRef:AuthenticateService, private route:Router) 
+  constructor(_httpRef:HttpClient,_authRef:AuthenticateService, private route:Router , _planServiceRef:PlanService) 
+
   { 
-    this.loggedInUser = localStorage.getItem('currentUser');
     this._http = _httpRef;
     this.router = route;
     this._auth = _authRef;
+    this._planService = _planServiceRef;
   }
  logOut():void {
    this._auth.navigateLogOutByUrl();
    this.router.navigateByUrl('login');
  }
   ngOnInit(): void {
-    var userId = JSON.parse(this.loggedInUser).userId;
-    console.log(this._http.get('https://localhost:44371/api/Plan/getPlan/' + userId).subscribe(
-      (result) => {
-        this.plans = result;
-        console.log(this.plans);
-      }
-    ))
-    
+
+    this.updatePlans();
+  }
+
+  updatePlans(){
+    this._planService.getFuturePlans().subscribe((result:any) =>{
+      this.futurePlans = result;
+      this.futurePlans.sort();
+      console.log(this.futurePlans)
+    })
+  }
+  togglePastPlans() {
+    if(this.pastPlans == null){
+      this.getPastPlans();
     }
+    if(this.showPastPlans)
+    {
+      this.showPastPlans = false;
+    }
+    else
+    {
+      this.showPastPlans = true;
+    }
+  }
+  getPastPlans() {
+    this._planService.getPastPlans().subscribe((result:any) =>{
+      this.pastPlans = result;
+    })
+
   }
 

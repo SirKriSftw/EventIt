@@ -3,11 +3,15 @@
         float:right;
 }
 
-
 .InfoCards {
     margin-left: 5%;
     margin-right: 5%;
 }
+
+.PastPlans {
+    background-color: darkgrey;
+}
+
 .buttonClass {
     display:flex;
     flex-direction: row-reverse;
@@ -17,6 +21,9 @@
 .mat-toolbar {
     display: flex;
     justify-content: space-between;
+    position:sticky;
+    top:0;
+    z-index:1000;
    
 }
 

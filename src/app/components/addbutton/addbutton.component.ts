@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
-import { MatDialog } from '@angular/material/dialog';
+import { Component, Input } from '@angular/core';
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
+import { PlanService } from 'src/app/services/plan.service';
 
 @Component({
   selector: 'app-addbutton',
@@ -7,12 +8,12 @@ import { MatDialog } from '@angular/material/dialog';
   styleUrls: ['./addbutton.component.css']
 })
 export class AddbuttonComponent {
-
-  test:any;
+  @Input()
+  plans = [];
   constructor(public dialog: MatDialog) { }
 
   openAddDialog() {
-    const dialogRef = this.dialog.open(AddbuttonContent, {width:'50%'});
+    let dialogRef = this.dialog.open(AddbuttonContent, {width:'50%'});
 
     dialogRef.afterClosed().subscribe();
   }
@@ -22,11 +23,33 @@ export class AddbuttonComponent {
   templateUrl: './addbutton-content.html',
 })
 export class AddbuttonContent {
-  listData:any = [];
+  _planService:PlanService;
+  error = '';
+
+
+  constructor(_planServiceRef:PlanService){
+    this._planService = _planServiceRef;
+  }
+  
   onAdd(value:any)
   {
-    console.log(value)
-    this.listData= [value];
+    this._planService.createPlan(value).subscribe((response) => {
+      this.error='';
+    },
+    (err) => {
+      if(err.status == 201)
+      {
+        this.error='';
+        window.location.reload(); 
+      }
+      else
+      {
+        this.error="Failed to add new plan";
+      }
+      
+    })
+
+      
   }
   
  

@@ -1,4 +1,4 @@
-﻿using EventIt.Models.EF;
+using EventIt.Models.EF;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
@@ -70,10 +70,40 @@ namespace EventIt.Controllers
                 return BadRequest(ex.Message);
             }
         }
+
+        [HttpGet]
+        [Route("getFuturePlans/{id:int}")]
+        public IActionResult getFuturePlanList(int? id)
+        {
+          try
+          {
+            return Ok(_plan.getFuturePlanList(id));
+          }
+          catch (System.Exception ex)
+          {
+            _logger.LogError(ex, ex.Message);
+            return BadRequest(ex.Message);
+          }
+        }
+
+        [HttpGet]
+        [Route("getPastPlans/{id:int}")]
+        public IActionResult getPastPlanList(int? id)
+        {
+          try
+          {
+            return Ok(_plan.getPastPlanList(id));
+          }
+          catch (System.Exception ex)
+          {
+            _logger.LogError(ex, ex.Message);
+            return BadRequest(ex.Message);
+          }
+        }
         #endregion
 
         #region PUT
-        [HttpPut]
+    [HttpPut]
         [Route("updatePlan")]
         public IActionResult updatePlan(Plan updatePlan)
         {
@@ -92,12 +122,12 @@ namespace EventIt.Controllers
 
         #region DELETE
         [HttpDelete]
-        [Route("deletePlan")]
-        public IActionResult deletePlan(bool? confirmation, int? id)
+        [Route("deletePlan/{id:int}")]
+        public IActionResult deletePlan(int? id)
         {
             try
             {
-                return Accepted(_plan.deletePlan(confirmation, id));
+                return Accepted(_plan.deletePlan(id));
             }
             catch (System.Exception ex)
             {
