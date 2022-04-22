@@ -3,24 +3,30 @@
         float:right;
 }
 
-
 .InfoCards {
     margin-left: 5%;
     margin-right: 5%;
 }
+
+.PastPlans {
+    background-color: darkgrey;
+}
+
 .buttonClass {
     display:flex;
     flex-direction: row-reverse;
-    margin-left: 80%;
-
-    
+    margin-left: 80%;    
 }
+
 .mat-panel-header {
     flex-basis:0;
 }
 .mat-toolbar {
     display: flex;
     justify-content: space-between;
+    position:sticky;
+    top:0;
+    z-index:1000;
    
 }
 

@@ -100,9 +100,9 @@ namespace EventIt.Controllers
             return BadRequest(ex.Message);
           }
         }
-    #endregion
+        #endregion
 
-    #region PUT
+        #region PUT
     [HttpPut]
         [Route("updatePlan")]
         public IActionResult updatePlan(Plan updatePlan)

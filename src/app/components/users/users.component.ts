@@ -35,21 +35,6 @@ error = '';
     this.visible = !this.visible;
   }
 
-  onSignUp(value:any) {
-    var body = {
-      "userID":0,
-      "email": value.email,
-      "password": value.password,
-      "name":value.name
-    }
-   this._http.post('https://localhost:44371/api/User/createUser',body,{headers:new HttpHeaders({'Content-Type':'application/json'})}).subscribe(
-     (result) => {
-       console.log(result)
-     }
-   );
-    console.log(value);
-
-  }
   onLogin(value:any) {
     console.log(this._auth.authenticate(value.email,value.password).subscribe((result) =>
     {
