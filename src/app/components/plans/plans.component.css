@@ -12,7 +12,16 @@
     background-color: darkgrey;
 }
 
+.Panels {
+    margin-left: 2%;
+    margin-right: 2%;
+}
+.mat-action-row {
+    position: absolute;
+    left: 90%;
+}
 .buttonClass {
+    background-color: red;
     display:flex;
     flex-direction: row-reverse;
     margin-left: 80%;

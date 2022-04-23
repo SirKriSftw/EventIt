@@ -7,14 +7,14 @@
     <button mat-icon-button color="prinary" (click)="togglePastPlans()" matTooltip="Show Past Plans" matTooltipPosition="right"><mat-icon>keyboard_backspace</mat-icon></button>
 <div class="content">
         <mat-accordion class="InfoCards" *ngFor = "let p of futurePlans">
-        <mat-expansion-panel>
+        <mat-expansion-panel class="Panels">
         <mat-expansion-panel-header>
          <mat-panel-title><b>{{p.planDateStart | date:"MM/dd/yyyy"}} - {{p.planDateEnd | date:"MM/dd/yyyy"}}</b></mat-panel-title> 
          <mat-panel-description>{{p.title}}
-         <div class="buttonClass">
-             <app-deletebutton [planId]="p.planId" [plans]="futurePlans"></app-deletebutton>
+         <mat-action-row>
+            <app-deletebutton [planId]="p.planId" [plans]="futurePlans"></app-deletebutton>
             <app-editbutton [planId]="p.planId" [planTitle]="p.title" [planStart]="p.planDateStart" [planEnd]="p.planDateEnd" [planDetails]="p.details"></app-editbutton>
-        </div> 
+         </mat-action-row> 
         </mat-panel-description>
         </mat-expansion-panel-header>
         <p>{{p.planDateStart | date:"HH:mm"}} - {{p.planDateEnd | date:"HH:mm"}}</p>
@@ -36,5 +36,5 @@
             </mat-expansion-panel>
         </mat-accordion>
      
-    </div>
+</div>
 </body>
