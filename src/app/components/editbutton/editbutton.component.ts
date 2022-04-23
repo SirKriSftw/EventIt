@@ -77,6 +77,7 @@ export class EditbuttonContent {
       }
       else
       {
+        console.log(err)
         this.error="Failed to edit plan";
       }      
     })      
