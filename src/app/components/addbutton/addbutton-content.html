@@ -4,9 +4,11 @@
       <form id="addForm" #addForm="ngForm" (ngSubmit)="onAdd(addForm.value)" >
           <div class="form-group">
               <label for="Title">Title:</label> 
-           <input type="text" id="title"  name="title" placeholder="Title" class="form-control" ngModel/><br/>
-           <input matInput type="datetime-local" ngModel name="startTime"/>
-           <input matInput type="datetime-local" ngModel name="endTime"/>
+                <input type="text" id="title"  name="title" placeholder="Title" class="form-control" ngModel/><br/>
+            <label>Start:</label> &nbsp;
+                <input matInput type="datetime-local" ngModel name="startTime"/> &nbsp;
+            <label>End: </label> &nbsp;
+                <input matInput type="datetime-local" ngModel name="endTime"/>
           </div>
            <div class="form-group">
               <label for="password">Description:</label> 

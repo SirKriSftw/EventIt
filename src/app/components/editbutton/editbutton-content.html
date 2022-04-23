@@ -4,9 +4,11 @@
       <form id="editForm" #editForm="ngForm" (ngSubmit)="onEdit(editForm.value)" >
           <div class="form-group">
               <label for="Title">Title:</label> 
-           <input type="text" name="title" class="form-control" [(ngModel)]="planTitle"/><br/>
-           <input matInput type="datetime-local" [(ngModel)]="planStart"  name="startTime"/>
-           <input matInput type="datetime-local" [(ngModel)]="planEnd"  name="endTime"/>
+                <input type="text" name="title" class="form-control" [(ngModel)]="planTitle"/><br/>
+            <label>Start:</label> &nbsp;
+                <input matInput type="datetime-local" [(ngModel)]="planStart"  name="startTime"/> &nbsp;
+            <label>End:</label> &nbsp;
+                <input matInput type="datetime-local" [(ngModel)]="planEnd"  name="endTime"/>
           </div>
            <div class="form-group">
               <label for="password">Description:</label> 
