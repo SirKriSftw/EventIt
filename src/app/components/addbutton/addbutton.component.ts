@@ -22,6 +22,7 @@ export class AddbuttonComponent {
 @Component({
   selector: 'addbutton-content',
   templateUrl: './addbutton-content.html',
+  styleUrls: ['./addbutton.component.css']
 })
 export class AddbuttonContent {
   _planService:PlanService;

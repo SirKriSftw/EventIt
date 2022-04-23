@@ -38,6 +38,7 @@ export class EditbuttonComponent implements OnInit {
 @Component({
   selector: 'editbutton-content',
   templateUrl: './editbutton-content.html',
+  styleUrls: ['./editbutton.component.css']
 })
 export class EditbuttonContent {
   _planService:PlanService;
