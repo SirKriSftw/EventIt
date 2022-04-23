@@ -27,7 +27,7 @@ export class PlansComponent implements OnInit {
     this._planService = _planServiceRef;
   }
  logOut():void {
-   this._auth.navigateLogOutByUrl();
+   this._auth.logOut();
    this.router.navigateByUrl('login');
  }
   ngOnInit(): void {

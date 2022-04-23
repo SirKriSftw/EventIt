@@ -1,3 +1,7 @@
+#signUpButton{
+    margin-left:10px;
+}
+
 .SignUp {
    
     display: inline-flexbox;
@@ -12,3 +16,7 @@
  .buttonClass {
      margin-left: 3px;
  }
+
+ .mat-raised-button {
+    color: rgb(255,215,64) !important;
+  }

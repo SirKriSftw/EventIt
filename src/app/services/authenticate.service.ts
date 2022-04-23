@@ -32,7 +32,7 @@ export class AuthenticateService {
     }));
     
   }
-  navigateLogOutByUrl():void {
+  logOut():void {
     localStorage.removeItem('currentUser');
     
   }
