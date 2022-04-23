@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
-import {HttpClient} from '@angular/common/http';
-import { HttpHeaders } from '@angular/common/http';
-import {map} from 'rxjs/operators';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { map } from 'rxjs/operators';
 import { Router } from '@angular/router';
+import { CanActivate } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
@@ -32,9 +32,20 @@ export class AuthenticateService {
     }));
     
   }
+
   logOut():void {
     localStorage.removeItem('currentUser');
-    
+  }
+
+  canActivate(): boolean {
+    if(localStorage.getItem('currentUser') != null)
+    {
+      return true;
+    }
+    else
+    {
+      return false;
+    }
   }
  
   }

@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { PlansComponent } from './components/plans/plans.component';
 import { UsersComponent } from './components/users/users.component';
+import { AuthenticateService } from './services/authenticate.service';
 
 
 
@@ -9,7 +10,7 @@ import { UsersComponent } from './components/users/users.component';
 const routes: Routes = [ 
   {path: '', redirectTo:'login', pathMatch: 'full'},
   {path: 'login', component: UsersComponent},
-  {path: "plans", component: PlansComponent},
+  {path: "plans", component: PlansComponent, canActivate:[AuthenticateService]},
 
 ];
 
