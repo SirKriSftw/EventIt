@@ -10,16 +10,21 @@
 
 .PastPlans {
     background-color: darkgrey;
+    margin-left: 2%;
+    margin-right: 2%;
 }
 
 .Panels {
     margin-left: 2%;
     margin-right: 2%;
+    position: relative;
 }
+
 .mat-action-row {
     position: absolute;
-    left: 90%;
+    right: 0;
 }
+
 .buttonClass {
     background-color: red;
     display:flex;
