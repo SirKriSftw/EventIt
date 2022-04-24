@@ -37,27 +37,16 @@ export class AddbuttonContent {
       this.error='';
     },
     (err) => {
-<<<<<<< HEAD
-      console.log(err)
-      if(err.status == 201)
-      {
-        this.error='';
-=======
       if(err.status == 201)
       {
         this.error='';
         window.location.reload(); 
->>>>>>> origin/main
       }
       else
       {
         this.error="Failed to add new plan";
       }
-<<<<<<< HEAD
-
-=======
       
->>>>>>> origin/main
     })
 
       
