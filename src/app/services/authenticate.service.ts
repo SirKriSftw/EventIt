@@ -20,7 +20,7 @@ export class AuthenticateService {
 
   authenticate(email:any, password:any)
   {
-    var isAuth = false;
+
     var body = {
       'email': email,
       'password': password
