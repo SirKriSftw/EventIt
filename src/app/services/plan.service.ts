@@ -42,12 +42,15 @@ export class PlanService {
     }
     return this._http.put('https://localhost:44371/api/Plan/updatePlan', data, {headers:new HttpHeaders({'Content-Type':'application/json'})});
   }
+
   getFuturePlans():any{
+    this.loggedInUser = localStorage.getItem('currentUser');
     var userId = JSON.parse(this.loggedInUser).userId;
     return this._http.get('https://localhost:44371/api/Plan/getFuturePlans/' + userId);
   }
 
   getPastPlans():any{
+    this.loggedInUser = localStorage.getItem('currentUser');
     var userId = JSON.parse(this.loggedInUser).userId;
     return this._http.get('https://localhost:44371/api/Plan/getPastPlans/' + userId);
   }
