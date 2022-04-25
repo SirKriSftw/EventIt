@@ -18,7 +18,7 @@ import { SignUpDialogContent } from './components/signup-dialog/signup-dialog.co
 import { MatDialogModule } from '@angular/material/dialog';
 import { AddbuttonComponent, AddbuttonContent } from './components/addbutton/addbutton.component';
 import {MatInputModule} from '@angular/material/input';
-import { EditbuttonComponent } from './components/editbutton/editbutton.component';
+import { EditbuttonComponent, EditbuttonContent } from './components/editbutton/editbutton.component';
 import { DeletebuttonComponent } from './components/deletebutton/deletebutton.component';
 import {MatTooltipModule} from '@angular/material/tooltip';
 import {MatExpansionModule} from '@angular/material/expansion';
@@ -42,6 +42,7 @@ import { PlanService } from './services/plan.service';
     AddbuttonContent,
     EditbuttonComponent,
     DeletebuttonComponent,
+    EditbuttonContent
     
     
     

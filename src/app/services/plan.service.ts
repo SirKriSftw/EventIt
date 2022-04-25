@@ -23,13 +23,24 @@ export class PlanService {
       "planDateEnd": newPlan.endTime,
       "userId": JSON.parse(this.loggedInUser).userId
     }
-    console.log(data)
     return this._http.post('https://localhost:44371/api/Plan/createplan/', data, {headers:new HttpHeaders({'Content-Type':'application/json'})});
   }
 
   delPlan(planId:any)
   {
     return this._http.delete('https://localhost:44371/api/Plan/deletePlan/' + planId);
+  }
+  editPlan(plan:any)
+  {
+    var data = {
+      "planId": plan.planId,
+      "userId": plan.userId,
+      "title": plan.title,
+      "details": plan.details,
+      "planDateStart": plan.startTime,
+      "planDateEnd": plan.endTime,
+    }
+    return this._http.put('https://localhost:44371/api/Plan/updatePlan', data, {headers:new HttpHeaders({'Content-Type':'application/json'})});
   }
   getFuturePlans():any{
     var userId = JSON.parse(this.loggedInUser).userId;

@@ -164,6 +164,7 @@ namespace EventIt.Models.EF
                 db.Database.ExecuteSqlRaw("exec updatePlan @planId, @startTime, @endTime, @details, @title, @result output",
                                            planId, startTime, endTime, details, title, updateResult);
                 db.SaveChanges();
+                db = new EventItContext();
 
                 bool PlanUpdateSuccess = Convert.ToBoolean(updateResult.Value);
                 if (PlanUpdateSuccess == true)

@@ -17,7 +17,6 @@ export class PlansComponent implements OnInit {
   futurePlans:any;
   pastPlans:any;
   showPastPlans = false;
-  loggedInUser:any;
   constructor(_httpRef:HttpClient,_authRef:AuthenticateService, private route:Router , _planServiceRef:PlanService) 
 
   { 
@@ -26,11 +25,10 @@ export class PlansComponent implements OnInit {
     this._auth = _authRef;
     this._planService = _planServiceRef;
   }
-
-  logOut():void {
-    this._auth.navigateLogOutByUrl();
-    this.router.navigateByUrl('login');
-  }
+ logOut():void {
+   this._auth.logOut();
+   this.router.navigateByUrl('login');
+ }
   ngOnInit(): void {
     this.updatePlans();
   }

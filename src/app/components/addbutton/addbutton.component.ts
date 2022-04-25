@@ -14,6 +14,7 @@ export class AddbuttonComponent {
 
   openAddDialog() {
     let dialogRef = this.dialog.open(AddbuttonContent, {width:'50%'});
+    
 
     dialogRef.afterClosed().subscribe();
   }
@@ -21,11 +22,11 @@ export class AddbuttonComponent {
 @Component({
   selector: 'addbutton-content',
   templateUrl: './addbutton-content.html',
+  styleUrls: ['./addbutton.component.css']
 })
 export class AddbuttonContent {
   _planService:PlanService;
   error = '';
-
 
   constructor(_planServiceRef:PlanService){
     this._planService = _planServiceRef;
@@ -40,19 +41,14 @@ export class AddbuttonContent {
       if(err.status == 201)
       {
         this.error='';
-        window.location.reload(); 
+        window.location.reload();  
       }
       else
       {
         this.error="Failed to add new plan";
-      }
-      
+      }      
     })
-
-      
-  }
-
- 
+  } 
 }
 
 

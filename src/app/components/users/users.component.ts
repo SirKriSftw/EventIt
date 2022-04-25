@@ -3,10 +3,6 @@ import {HttpClient} from '@angular/common/http';
 import { Router } from '@angular/router';
 import { AuthenticateService } from 'src/app/services/authenticate.service';
 
-
-
-
-
 @Component({
   selector: 'app-user',
   templateUrl: './users.component.html',
@@ -48,6 +44,7 @@ error = '';
   }
  
   ngOnInit(): void {
+    this._auth.logOut();
   }
 
 navigateByUrl() {
