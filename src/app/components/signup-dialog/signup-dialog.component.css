@@ -20,3 +20,7 @@
  .mat-raised-button {
     color: rgb(255,215,64) !important;
   }
+
+  .error {
+      color: red;
+  }
